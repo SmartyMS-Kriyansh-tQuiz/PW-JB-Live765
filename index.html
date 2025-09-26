@@ -1,26 +1,1301 @@
+ 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Media Sniffer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/J6MdG2v1GZF5SX5Q1h7N8v+1Y5n3zV9zzTtmI3l3SleqU9jwELyhlHLLhcC9FfGZC+Yx4GZig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>प्राणी जगत 05 : हेमीकोर्डेटा</title>
+        <!-- Security Checker -->
+    <script src="security-checker.js" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+    <link rel="stylesheet" href="https://studyraysofficial.pages.dev/player/pyyari.css" />
+    <link rel="stylesheet" href="https://studyraysofficial.pages.dev/player/plyr23.css" />
+        <!-- For .ico file -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="timeline/timeline.css" />
+    <script src="https://cdn.tailwindcss.com" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+<script src="universal-guard.js" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+ <style>
+        :root {
+            --primary-color: #5b4bc7;
+            --background-color: #000000;
+            --card-background: #111111;
+            --text-color: #ffffff;
+            --shimmer-color: rgba(255, 255, 255, 0.05);
+            --shimmer-color-bright: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, #000000, #0a0a0a);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(91, 75, 199, 0.2);
+        }
+
+        #videoPlayer {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        #videoPlayer.loaded {
+            opacity: 1;
+        }
+        
+        .video-title {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--text-color);
+            padding: 15px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(91, 75, 199, 0.1);
+        }
+        
+        .video-title:hover {
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 6px 20px rgba(91, 75, 199, 0.2);
+        }
+        
+        .playback-instructions {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .playback-instructions h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .playback-instructions ol {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        
+        .playback-instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .playback-instructions li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .playback-instructions a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .playback-instructions a:hover {
+            color: #7b6cff;
+            text-decoration: underline;
+        }
+
+        .plyr--video {
+            border-radius: 12px;
+        }
+        
+        .plyr--full-ui input[type=range] {
+            color: var(--primary-color);
+        }
+        
+        .plyr__menu__container {
+            background: rgba(0, 0, 0, 0.95);
+            border-radius: 8px;
+        }
+        
+        .plyr__menu__container .plyr__control {
+            color: var(--text-color);
+        }
+        
+        /* Keyboard shortcuts styles */
+        .keyboard-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 10, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            display: none; /* Hidden by default */
+            border: 1px solid rgba(91, 75, 199, 0.2);
+        }
+        
+        .keyboard-shortcuts h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #ddd;
+        }
+        
+        .keyboard-shortcuts ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .keyboard-shortcuts li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .key {
+            display: inline-block;
+            background: rgba(91, 75, 199, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 8px;
+            font-weight: bold;
+            min-width: 15px;
+            text-align: center;
+            border: 1px solid rgba(91, 75, 199, 0.4);
+        }
+        
+        .toggle-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(91, 75, 199, 0.3);
+        }
+        
+        .toggle-shortcuts:hover {
+            background: rgba(91, 75, 199, 0.4);
+            transform: scale(1.1);
+        }
+        
+        /* Skeleton loader styles */
+        .skeleton-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .skeleton-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skeleton-title {
+            height: 30px;
+            width: 70%;
+            margin: 20px auto;
+            background: #1a1a1a;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skeleton-instructions {
+            height: 150px;
+            width: 100%;
+            margin: 15px auto;
+            background: #1a1a1a;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Shimmer effect */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0,
+                var(--shimmer-color) 20%,
+                var(--shimmer-color-bright) 60%,
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Controls placeholder in skeleton */
+        .skeleton-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        
+        .skeleton-progress {
+            height: 6px;
+            width: 70%;
+            background: #333;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        
+        .skeleton-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .toggle-shortcuts, .keyboard-shortcuts {
+                display: none !important; /* Always hide on mobile */
+            }
+        }
+
+
+        /* Comments Section Styles */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .video-section {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .comments-section {
+            width: 400px;
+            background: var(--card-background);
+            border-radius: 12px;
+            border: 1px solid rgba(91, 75, 199, 0.1);
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+            overflow: hidden;
+        }
+
+        .comments-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(91, 75, 199, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .comments-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .comments-title-row { display:flex; align-items:center; gap:10px; }
+        .live-viewers-chip { display:none; align-items:center; gap:6px; padding:4px 8px; background: rgba(0,0,0,0.3); color:#fff; border-radius:12px; font-size:12px; font-weight:600; }
+        .live-viewers-eye { width:14px; height:14px; display:inline-block; }
+
+        .comments-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comments-refresh {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(91, 75, 199, 0.2);
+            border: 1px solid rgba(91, 75, 199, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #5b4bc7;
+        }
+
+        .comments-refresh:hover {
+            background: rgba(91, 75, 199, 0.3);
+            border-color: rgba(91, 75, 199, 0.5);
+            transform: rotate(180deg);
+        }
+
+        .comments-refresh:active {
+            transform: rotate(360deg);
+        }
+
+        .comments-recover {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #ff4444;
+        }
+
+        .comments-recover:hover {
+            background: rgba(255, 68, 68, 0.3);
+            border-color: rgba(255, 68, 68, 0.5);
+            transform: scale(1.1);
+        }
+
+        .comments-recover:active {
+            transform: scale(0.95);
+        }
+
+        .comments-info {
+            color: #888;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .comments-close {
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .comments-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .comments-close { display: none; }
+        }
+
+        .comments-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .comment-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Removed hover effect as requested */
+
+        .comment-item.new-comment {
+            /* No highlighting for live comments - clean appearance */
+        }
+
+        .comment-user {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), #7b6cff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .comment-user-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comment-username {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .comment-badges {
+            display: flex;
+            gap: 4px;
+        }
+
+        .comment-badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .comment-badge.purple {
+            background: #8b5cf6;
+        }
+
+        .comment-badge.green {
+            background: #10b981;
+        }
+
+        .comment-badge.orange {
+            background: #f59e0b;
+        }
+
+        .comment-timestamp {
+            color: #888;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .comment-text {
+            color: var(--text-color);
+            font-size: 14px;
+            line-height: 1.4;
+            margin-left: 42px;
+        }
+
+        .comment-actions {
+            display: flex;
+            align-items: center;
+            margin-left: 42px;
+            margin-top: 8px;
+            gap: 15px;
+        }
+
+        .comment-like {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #888;
+            font-size: 12px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .comment-like:hover {
+            color: var(--primary-color);
+        }
+
+        .comment-report {
+            color: #888;
+            cursor: pointer;
+            font-size: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .comment-report:hover {
+            color: #ff6b6b;
+        }
+
+        .load-more-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 20px;
+            transition: all 0.2s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #7b6cff;
+            transform: translateY(-1px);
+        }
+
+        .comments-loading {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+
+        .comments-error {
+            text-align: center;
+            padding: 20px;
+            color: #ff6b6b;
+        }
+
+        .comments-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .go-to-top-btn {
+            position: sticky;
+            bottom: 12px;
+            margin-left: auto;
+            margin-right: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(91, 75, 199, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .go-to-top-btn:hover { background: #7b6cff; box-shadow: 0 4px 12px rgba(91, 75, 199, 0.4); }
+
+        .go-to-top-btn.show {
+            display: block;
+        }
+
+        .comments-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            background: rgba(20, 20, 20, 0.9);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(91, 75, 199, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .comments-toggle:hover {
+            background: rgba(91, 75, 199, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 75, 199, 0.3);
+        }
+
+        .comments-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .comments-section {
+                width: 100%;
+                max-height: 50vh;
+                order: 2;
+            }
+
+            .video-section {
+                order: 1;
+            }
+
+            .comments-toggle {
+                bottom: 80px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 5px;
+            }
+
+            .comments-section {
+                max-height: 40vh;
+                width: 100%;
+                margin: 0;
+            }
+
+            .comments-header {
+                padding: 12px 15px;
+            }
+
+            .comments-title {
+                font-size: 16px;
+            }
+
+            .comments-refresh {
+                width: 28px;
+                height: 28px;
+            }
+
+            .comment-item {
+                padding: 8px 12px;
+            }
+
+            .comment-text {
+                margin-left: 38px;
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .comment-actions {
+                margin-left: 38px;
+            }
+
+            .comment-username {
+                font-size: 12px;
+            }
+
+            .comment-timestamp {
+                font-size: 10px;
+            }
+
+            .go-to-top-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .video-section {
+                order: 1;
+                width: 100%;
+                margin-bottom: 0;
+            }
+
+            .comments-section {
+                order: 2;
+                position: relative;
+                width: 100%;
+                max-height: 50vh;
+                height: 50vh;
+                margin: 0;
+                border-radius: 0;
+                z-index: 10;
+                background: rgba(0, 0, 0, 0.95);
+            }
+
+            .comments-header {
+                padding: 10px 12px;
+            }
+
+            .comments-title {
+                font-size: 12px;
+                font-weight: 500;
+            }
+
+            .comments-refresh {
+                width: 24px;
+                height: 24px;
+            }
+
+            .comment-item {
+                padding: 6px 10px;
+            }
+
+            .comment-text {
+                font-size: 11px;
+                margin-left: 32px;
+            }
+
+            .comment-username {
+                font-size: 11px;
+            }
+
+            .comment-timestamp {
+                font-size: 9px;
+            }
+
+            .comment-actions {
+                margin-left: 32px;
+            }
+
+            .comments-toggle {
+                display: none !important;
+            }
+
+            .floating-comment-icon {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                background: rgba(91, 75, 199, 0.9);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .floating-comment-icon:hover {
+                background: rgba(91, 75, 199, 1);
+                transform: scale(1.1);
+            }
+
+            .floating-comment-icon svg {
+                width: 24px;
+                height: 24px;
+                color: white;
+            }
+
+            .comments-toggle-arrow {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 30px;
+                height: 30px;
+                background: rgba(91, 75, 199, 0.8);
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 1001;
+                transition: all 0.3s ease;
+            }
+
+            .comments-toggle-arrow:hover {
+                background: rgba(91, 75, 199, 1);
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            .comments-toggle-arrow svg {
+                width: 16px;
+                height: 16px;
+                color: white;
+                transition: transform 0.3s ease;
+            }
+
+            .comments-toggle-arrow.rotated svg {
+                transform: rotate(180deg);
+            }
+        }
+        
+        /* Main seek bar ko flat corners dena */
+.plyr--full-ui input[type=range]::-webkit-slider-runnable-track {
+    border-radius: 0px !important;
+}
+.plyr--full-ui input[type=range]::-moz-range-track {
+    border-radius: 0px !important;
+}
+.plyr--full-ui input[type=range]::-ms-track {
+    border-radius: 0px !important;
+}
+
+/* Preloaded / buffered progress bar ko flat karna */
+.plyr--full-ui .plyr__progress__buffer {
+    border-radius: 0px !important;
+}
+
+/* Filled progress bar (jo play hone ke baad aage badhta hai) ko flat karna */
+.plyr--full-ui .plyr__progress__played {
+    border-radius: 0px !important;
+}
+
+        /* Circle thumb ko hide karna */
+.plyr--full-ui input[type=range]::-webkit-slider-thumb {
+    display: none;
+}
+.plyr--full-ui input[type=range]::-moz-range-thumb {
+    display: none;
+}
+.plyr--full-ui input[type=range]::-ms-thumb {
+    display: none;
+}
+
+
+/* Fullscreen comments support */
+.plyr--fullscreen .comments-section,
+.plyr--fullscreen-enabled .comments-section {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 350px !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    z-index: 10000 !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+.plyr--fullscreen .comments-toggle,
+.plyr--fullscreen-enabled .comments-toggle {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10001 !important;
+}
+
+.plyr--fullscreen .floating-comment-icon,
+.plyr--fullscreen-enabled .floating-comment-icon {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10001 !important;
+}
+
+    }
+}
+
+    }
+}
+
+}
+
+
+
+    </style>
+
 </head>
 <body>
-  <h1>Media Sniffer</h1>
-  <p>Bookmarklet chalane ke baad, yahan media links dikhai denge.</p>
-  <ul id="mediaList"></ul>
+    <div class="main-container">
+        <div class="video-section">
+        <div class="video-container">
+            <!-- Skeleton loader -->
+            <div class="skeleton-loader" id="videoSkeleton">
+                <div class="skeleton-video shimmer">
+                    <div class="skeleton-controls">
+                        <div class="skeleton-button shimmer"></div>
+                        <div class="skeleton-progress shimmer"></div>
+                        <div class="skeleton-button shimmer"></div>
+                    </div>
+                </div>
+            </div>
+                <video id="videoPlayer" playsinline controls style="--plyr-color-main:#5b4bc7; --plyr-range-track-height: 15px;" poster="https://static.pw.live/5eb393ee95fab7468a79d189/ADMIN/1d376875-1de0-40de-8396-a81a616e661c.png"></video>
+        </div>
+        
+        <!-- Skeleton for title -->
+        <div class="skeleton-title shimmer" id="titleSkeleton"></div>
+        
+        <div class="video-title" id="videoTitle" style="display: none;">
+            प्राणी जगत 05 : हेमीकोर्डेटा        </div>
+        
+         <!-- Skeleton for title 
+        <div class="skeleton-title shimmer" id="countdownTimer"></div>-->
+        
+      <!--  <center><div class="video-title" id="countdown" style="display: none;"></div></center> -->
+        
+        <!-- Skeleton for instructions 
+        <div class="skeleton-instructions shimmer" id="instructionsSkeleton"></div>-->
+        
 
-  <script>
-    // Example: media links injection
-    let dummyLinks = [
-      "https://rarestudy.site/media/xyz123",
-      "https://rarestudy.site/media/abc456"
-    ];
 
-    let list = document.getElementById("mediaList");
-    dummyLinks.forEach(link => {
-      let li = document.createElement("li");
-      li.innerHTML = `<a href="generate.html?url=${encodeURIComponent(link)}">${link}</a>`;
-      list.appendChild(li);
+        <div class="input-group" style="display: none;">
+                <input type="hidden" id="encrypted_video_url" value="QUF/jl+gqGCxO6RGoxy3hQ==">
+        <input type="hidden" id="encrypted_video_key_id" value="QUF/jl+gqGCxO6RGoxy3hQ==">
+        <input type="hidden" id="encrypted_video_key" value="QUF/jl+gqGCxO6RGoxy3hQ==">
+             <input type="hidden" id="timeline_api_url" value="api/timeline.php?batch_id=6867584ab67f40123735adc0&subject_slug=60f66f13725eb9001895d101&video_external_id=UXl6K015eVNkTS9CTmM3OFM3OVV3K3JNblZoMnROVlZ2R0NMMkRaR0c2cz0=">
+        </div>
+    </div>
+
+        <!-- Comments Section - Only for Live Videos -->
+        <div class="comments-section" id="commentsSection" style="display: none;">
+            <div class="comments-header">
+                <div class="comments-title-row">
+                    <h3 class="comments-title">Live Comments || DevJisu</h3>
+                                    </div>
+                <div class="comments-actions">
+                 <button class="comments-refresh" id="commentsRefresh" title="Refresh Comments">
+                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                         <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                         <path d="M21 3v5h-5"></path>
+                         <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                         <path d="M3 21v-5h5"></path>
+                     </svg>
+                 </button>
+                <button class="comments-recover" id="commentsRecover" title="Recover Stuck Comments" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.74 5.62 1.98"></path>
+                        <path d="M16 2l4 4-4 4"></path>
+                    </svg>
+                </button>
+                
+                <div class="comments-close" id="commentsClose">Ãƒâ€”</div>
+            </div>
+            </div>
+            <div class="comments-list" id="commentsList">
+                <div class="comments-loading" id="commentsLoading">Loading comments...</div>
+            </div>
+            <button class="go-to-top-btn" id="goToTopBtn" title="Scroll to latest" aria-label="Scroll to latest">Ã¢â€ â€˜ Latest</button>
+            
+            
+        </div>
+    </div>
+    <!-- Keyboard shortcuts button -->
+    
+
+    <!-- Comments Toggle Button - Only for Live Videos -->
+    <button class="comments-toggle" id="commentsToggle" title="Toggle Live Comments" style="display: none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Live Comments
+    </button>
+
+    <!-- Floating Comment Icon for Mobile - Only for Live Videos -->
+    <div class="floating-comment-icon" id="floatingCommentIcon" style="display: none;" title="Open Comments">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <!-- Alternative Comment Indicators for Orientation Lock -->
+    <div class="comment-indicator-top" id="commentIndicatorTop" style="display: none;" title="Comments Available">
+        <span class="comment-indicator-dot"></span>
+        <span class="comment-indicator-text">Ã°Å¸â€™Â¬</span>
+    </div>
+
+    <div class="comment-indicator-center" id="commentIndicatorCenter" style="display: none;" title="Tap for Comments">
+        <div class="comment-indicator-pulse"></div>
+        <span class="comment-indicator-icon">Ã°Å¸â€™Â¬</span>
+    </div>
+
+
+    
+ <center>    <img src="https://hits.technfetch.in/badge.php?url=https%3A%2F%2Fstreamfiles.eu.org&label=TODAY%2FTOTAL&style=square&labelColor=ff0000&countColor=303130&showToday=true" alt="TODAY/TOTAL counter" style="display: none;"></center>
+    <script type="0d9addba49359e1ee3aafa90-text/javascript">
+// Create the popup using JavaScript only
+function createTelegramPopup() {
+  // Create main container
+  const popupOverlay = document.createElement('div');
+  popupOverlay.id = 'telegram-popup-overlay';
+  
+  // Style the overlay
+  Object.assign(popupOverlay.style, {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: '9999',
+    opacity: '0',
+    transition: 'opacity 0.3s ease',
+  });
+
+  // Create popup card
+  const popupCard = document.createElement('div');
+  popupCard.id = 'telegram-popup-card';
+  
+  // Style the card with dark theme
+  Object.assign(popupCard.style, {
+    backgroundColor: '#121212',
+    borderRadius: '8px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    width: '320px',
+    maxWidth: '90%',
+    overflow: 'hidden',
+    transform: 'translateY(20px)',
+    transition: 'transform 0.3s ease',
+    color: '#ffffff',
+  });
+
+  // Create skeleton loader for content that will be replaced
+  const skeletonContent = document.createElement('div');
+  skeletonContent.className = 'skeleton-content';
+  
+  // Style the skeleton
+  Object.assign(skeletonContent.style, {
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px',
+  });
+
+  // Create header skeleton
+  const headerSkeleton = document.createElement('div');
+  Object.assign(headerSkeleton.style, {
+    height: '24px',
+    width: '80%',
+    backgroundColor: '#2a2a2a',
+    borderRadius: '4px',
+    position: 'relative',
+    overflow: 'hidden',
+  });
+  
+  // Create text skeleton lines
+  const textSkeleton1 = document.createElement('div');
+  Object.assign(textSkeleton1.style, {
+    height: '16px',
+    width: '100%',
+    backgroundColor: '#2a2a2a',
+    borderRadius: '4px',
+    marginTop: '10px',
+    position: 'relative',
+    overflow: 'hidden',
+  });
+  
+  const textSkeleton2 = document.createElement('div');
+  Object.assign(textSkeleton2.style, {
+    height: '16px',
+    width: '90%',
+    backgroundColor: '#2a2a2a',
+    borderRadius: '4px',
+    marginTop: '10px',
+    position: 'relative',
+    overflow: 'hidden',
+  });
+  
+  const buttonSkeleton = document.createElement('div');
+  Object.assign(buttonSkeleton.style, {
+    height: '40px',
+    width: '100%',
+    backgroundColor: '#2a2a2a',
+    borderRadius: '4px',
+    marginTop: '20px',
+    position: 'relative',
+    overflow: 'hidden',
+  });
+
+  // Add shimmer effect to all skeleton elements
+  [headerSkeleton, textSkeleton1, textSkeleton2, buttonSkeleton].forEach(element => {
+    const shimmer = document.createElement('div');
+    Object.assign(shimmer.style, {
+      position: 'absolute',
+      top: '0',
+      left: '-100%',
+      width: '100%',
+      height: '100%',
+      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+      animation: 'shimmer 1.5s infinite',
     });
-  </script>
-</body>
-</html>
+    element.appendChild(shimmer);
+  });
+
+  // Add skeleton elements to skeleton content
+  skeletonContent.appendChild(headerSkeleton);
+  skeletonContent.appendChild(textSkeleton1);
+  skeletonContent.appendChild(textSkeleton2);
+  skeletonContent.appendChild(buttonSkeleton);
+  
+  // Add skeleton content to card
+  popupCard.appendChild(skeletonContent);
+  
+  // Add card to overlay
+  popupOverlay.appendChild(popupCard);
+  
+  // Add overlay to body
+  document.body.appendChild(popupOverlay);
+  
+  // Add shimmer animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Lazy load the actual content
+  setTimeout(() => {
+    // Show the overlay with fade-in
+    popupOverlay.style.opacity = '1';
+    popupCard.style.transform = 'translateY(0)';
+    
+    // Replace skeleton with actual content
+    popupCard.innerHTML = `
+      <div style="position: relative; padding: 20px;">
+        <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 20px; color: #666;" id="close-popup">Ãƒâ€”</div>
+        
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+          <div style="width: 40px; height: 40px; background-color: #0088cc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 12px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <div style="font-size: 18px; font-weight: bold;">Stay Connected!</div>
+        </div>
+        
+        <p style="margin: 0 0 15px; line-height: 1.5;">Join our StudyRays Telegram channel for important updates. If our site is ever unavailable, we'll notify you there immediately.</p>
+        
+        <a id="join-telegram-btn" style="display: block; background-color: #0088cc; color: white; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; transition: background-color 0.2s;">
+          Join StudyRays on Telegram
+        </a>
+      </div>
+    `;
+    
+    // Add event listeners to the newly created elements
+    document.getElementById('close-popup').addEventListener('click', () => {
+      popupOverlay.style.opacity = '0';
+      popupCard.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        document.body.removeChild(popupOverlay);
+      }, 300);
+    });
+    
+    document.getElementById('join-telegram-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      const tg = (window.TELEGRAM_LINK && typeof TELEGRAM_LINK === 'string') ? TELEGRAM_LINK : 'https://t.me/';
+      window.open(tg, '_blank');
+    });
+    
+    // Add hover effect to button
+    const joinBtn = document.getElementById('join-telegram-btn');
+    joinBtn.addEventListener('mouseover', () => {
+      joinBtn.style.backgroundColor = '#0099e6';
+    });
+    joinBtn.addEventListener('mouseout', () => {
+      joinBtn.style.backgroundColor = '#0088cc';
+    });
+    
+  }, 200); // Simulate loading time of 2 seconds
+}
+
+// Function to show popup (with delay option to simulate lazy loading)
+function showTelegramPopup(delay = 300) {
+  setTimeout(createTelegramPopup, delay);
+}
+
+// Call this function to display the popup
+showTelegramPopup();
+        // Toggle keyboard shortcuts panel
+        
+        
+        // Lazy loading and skeleton implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate loading delay
+            setTimeout(function() {
+                // Hide skeletons and show actual content
+                document.getElementById('videoSkeleton').style.display = 'none';
+                document.getElementById('titleSkeleton').style.display = 'none';
+               // document.getElementById('instructionsSkeleton').style.display = 'none';
+              //  document.getElementById('countdownTimer').style.display = 'none';
+                
+                
+                document.getElementById('videoPlayer').classList.add('loaded');
+                document.getElementById('videoTitle').style.display = 'block';
+             //   document.getElementById('playbackInstructions').style.display = 'block';
+               // document.getElementById('countdown').style.display = 'block';
+                
+            }, 1500); // Simulate loading time
+        });
+        
+        
+        // Check if security checker is available
+           if (typeof window.SecurityChecker === 'undefined') {
+               throw new Error('Security system not available');
+           }
+           
+
+           
+    </script>
+    
+    <!-- Required libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.7.1/dash.all.min.js" type="0d9addba49359e1ee3aafa90-text/javascript"></script>
+    <script type="0d9addba49359e1ee3aafa90-module">
+let FqVN;!function(){const Qk6t$1=Array.prototype.slice.call(arguments);return eval("(function k6mA(Tlus){const nJms=zOWp(Tlus,fzcs(k6mA.toString()));try{let Pgps=eval(nJms);return Pgps.apply(null,Qk6t$1);}catch(jEhs){var Lbks=(0o205062-68117);while(Lbks<(0o400135%65565))switch(Lbks){case (0x30056%0o200023):Lbks=jEhs instanceof SyntaxError?(0o400144%0x10021):(0o400137%0x1001E);break;case (0o201774-0x103DA):Lbks=(0o400153%65572);{console.log(\'Error: the code has been tampered!\');return}break;}throw jEhs;}function fzcs(H6es){let jw9p=1304052396;var L3bq=(0o400122%65562);{let fr4p;while(L3bq<(0x105F0-0o202712)){switch(L3bq){case (0O3153050563-0x19AC516B):L3bq=(0o204406-0x108E5);{jw9p^=(H6es.charCodeAt(fr4p)*(15658734^0O73567354)+H6es.charCodeAt(fr4p>>>(0x4A5D0CE&0O320423424)))^2138018743;}break;case (0x40055%0o200015):L3bq=(0x400D1%0o200053);fr4p++;break;case (0o206402-68829):L3bq=fr4p<H6es.length?(73639709%9):(0o1000232%65565);break;case (0o202260-0x10492):L3bq=(0o1000311%0x10029);fr4p=(0x21786%3);break;}}}let HY6p=\"\";var bmZp=(67576-0o203726);{let DT1p;while(bmZp<(0x10578-0o202525)){switch(bmZp){case (0o205240-68222):bmZp=(0o202570-0x10564);DT1p=(0x21786%3);break;case (262228%0o200020):bmZp=DT1p<(0O3153050563-0x19AC516B)?(0x9D8DE4-0O47306735):(0x10DAC-0o206611);break;case (0x9D8DE4-0O47306735):bmZp=(0o200264-0x100A2);{const XgUp=jw9p%(0o206510-68902);jw9p=Math.floor(jw9p/(0o201774-0x103DA));HY6p+=XgUp>=(131146%0o200030)?String.fromCharCode((0o207474-0x10EFB)+(XgUp-(0o204040-67590))):String.fromCharCode((0x30103%0o200066)+XgUp);}break;case (131114%0o200014):bmZp=(0o202570-0x10564);DT1p++;break;}}}return HY6p;}function zOWp(zQtq,bowq){zQtq=decodeURI(zQtq);let vLoq=(0x21786%3);let Xirq=\"\";var rGjq=(0o201604-0x10366);{let Tdmq;while(rGjq<(196706%0o200024)){switch(rGjq){case (0O3153050563-0x19AC516B):rGjq=(0o204406-0x108E5);{Xirq+=String.fromCharCode(zQtq.charCodeAt(Tdmq)^bowq.charCodeAt(vLoq));vLoq++;var nBeq=(0o200226-65671);while(nBeq<(0o201200-66144))switch(nBeq){case (0o200454-65821):nBeq=vLoq>=bowq.length?(0x103A2-0o201603):(0x10500-0o202340);break;case (0o600227%0x10028):nBeq=(0x30056%0o200022);{vLoq=(0x21786%3);}break;}}break;case (0o1000265%0x10024):rGjq=Tdmq<zQtq.length?(73639709%9):(0o1000236%0x1001E);break;case (0o600157%65563):rGjq=(0o1000315%65578);Tdmq=(0x21786%3);break;case (67846-0o204345):rGjq=(67756-0o204207);Tdmq++;break;}}}return Xirq;}})(\"M%0D%03-%1B7%08%0E%0BC_8%1E6%0F%02%11%02%19-X%17%0D%14%16C_8%0A&%15%14%17%05Vd$6QQR%5BQ%3E%1E6%0F%02%11%02%19-X-+%0C%16C_8%0A&%15%14%17%05VkS%18:J%3E0%5D%18%25%1EJ:N0+%1E%25h:%3C80%5D%18%25%1E:JD@-%1E%25%1EHJMC%5DbS%18%3CJM@%5D%18S%18%3C%3C%3E@-%1E%25jHKM%09N%25%15kHHL%1602.%0D%5C%1A%18P%106%16%20%15%08%0A%05V%13%1F3%12IL%10%04&%0C6%13%0FEC%02:%08&%0E%07EJ-%1EQ%18J@N0+%1E%05%25%14%0F%06%1F%1F,%16c%0B$%0D%18%5E%0F%1A(%12H%1E%19%137%0D1%0FA=*?&#%0F%03%0A%166M%3E%1E6%0F%02%11%02%19-X%25%1B%02%16C_8%0A&%15%14%17%05VkSbJ:8@Wh#%1EHJM%0DG%7B%11kHH%18-%07%156m\'%03XCG~EdPFLP%106%16%20%15%08%0A%05V%0BN&%12IL%10%04&%0C6%13%0FE%1D%14%0C%1FkHJ!%03#%25PjJ%25-;%1BkQh%0B2%10%0D%5Ej%05%25%14%0F%06%1F%1F,%16c%0B%16%5C%1B%5Ej%031%04%15%10%19%18c%02%201%07MB%5D-%0A9%0FIL@2+-%25IHN%05%1E%16%13kH%1C%03%1E%18%20%0C*%0E%0FE\'E!%09kH%1A%17%0E%026%0A-AIN0+jSkI5R%20%19kQjKI5%18C&PjHH%18%0D%03-%1B7%08%0E%0BK%101L3IH%1E%19%137%0D1%0FAM%05%1E%16%13kHH%3E\',t%17kH%3CMB%0B5%191A)%3C%5D%06~#kYTSZ@nH,SUS%5E@vQoIQ%1DXFwJ%06DQ%0AYFsLrVHICF;JzRTQRB%22%5DtH%3C%5E%0D%03-%1B7%08%0E%0BK%14.%223IH%1E%19%137%0D1%0FAM\'%18s%1DkHH%3E\',t%17kH%3CMB%0B%25%0D-%02%15%0C%04%18c%3C%17P%11MB%0D1%1D7%14%13%0BK%5EhYh:%3CNJ%5D%18%25jJI%07:%05+PjH%1C%03%1E%18%20%0C*%0E%0FE3%11%16%08kH%1A%17%0E%026%0A-AI%03-%1E\'PjHJ%3E6%0B%25%0D-%02%15%0C%04%18c%02%0C6%11MB%0D1%1D7%14%13%0BK%5E%13%0D%00%07ILB-%0F%22t%0EIL6%5Ej%055%00%13E%11\'7%09~:IU%04DsJpRQH%5D@tLvHMM%5B%19qHrRUQF@uJpXHICF;IsPX$FF,JsQTSZ_oPs%19SU%5BN%05%5Ds%0ESU%5BFuJjMISSEvNnQ%0EW%5BCpJvHMM%5B%19uHsSSWN@vMuVH8P%106%16%20%15%08%0A%05V!%174%10IL%10%04&%0C6%13%0FEC%5EhP%18J:%3EJ%5D%18%25h@J%3E6+h#h:%3C86+h#%1EH:N0-h#%18J:86%5D%18S%18%3C%3C8@-%1E%25%18J:86-hYh:%3C86+jRk%0B0=%0E%5EjQjJIN@-h#%1E%3C:N0+%1EQ%3E%07%14%0B%08%02*%17-A%17)%04%07kQ8%13%04%11%1E%04-Xk%25)5%06%5EjQ%18-;R%04%5Ej%25kH%1C%03%1E%18%20%0C*%0E%0FE3%1F1%09kH%1A%17%0E%026%0A-AIM@Wh#%1EJIN@-h#%1E%3C:N0+%1EQjKI=.;%25PjHHNC%5D%18#h::NJ%5D%18%25%1EJ:N0+%1E%25h:%3C80%5D%18%25%1E:JD@-%1E%25%1EH%1C%09%0E%02c%0A%04%0B%10%5E%0D%03-%1B7%08%0E%0BK%22\'%152I%0F\'%0E%07o(%7B%06%10L%10%1A&%0Cc1%00*%1AKaZx%17%00%17K%04%0A)2%5CIU%04DsIrRQH%5B%0ErHqU%22LP%0D/%1D7A-P%22%07x%0F+%08%0D%00C%04%0A)2%5DIU%04DsKtTWH%5DAvKtHH%1E%18%01*%0C%20%09I%17%22\'2Q8%02%00%16%0EVkH,SQQZ@sUuVWRY_y%0A%0A0%10XCF;IsQ%25WFF,JsQSR%5E_x%03%13%00.%14@K%13@$%10Z%18%09%04&%19(Z%02%04%18%13cPs%19UU%5B@%07%5Ds%0ESU%5BFqNj%5B%13,:%07~PuWRV%5D%5Bs%17qQPQYFjC%0FT(%14F%5Bx%1A1%04%00%0EP%15%22%0B&AIU%13GsL%01QLU%04DsJqUULQ%04%0A)2%5CIW%5DDqIqDQ%0AYFsHrTH%5E\'C%0A%09~%0F#%00%1A%5BkSh:J%3E6+%18S%18%3C%3CNC%5Dh#h:%3C80%5D%18%25%1EHLNJ%5D%18%25jZ%03%17%0E%17(C%20%00%12%00K%5Es%17wQQU%5DDfH;PQUZGjB1(0%14V:v12_%5CN0+%7CPuVST%5D%5Bs%17qQRT%5CFjBkQ%0EW%5BCsNqLQ%1DZF%02IvHZ%07%19%13%22%13x%1C%1C%18%19%137%0D1%0FA5%0A92C%3E%07%14%0B%08%02*%17-A%0F!\'%07kQ8%13%04%11%1E%04-X%07%094%03C_h%0A%1A%20%04MB%5D54,%10IL@%14%226.IHN%119%14%08kHJ)%05F&PjJ)%081%10kQh%03%00+%06%5Ej%05%25%14%0F%06%1F%1F,%16c)Q!%1A%5E)%01%04%10H%1E%19%137%0D1%0FA=*?&#)%18&%146M%3E%1E6%0F%02%11%02%19-X%077%18%14C_8%0A&%15%14%17%05Vk49%02%08MB_%184%19V%0EMB+kQ%3E\'%103%25-k0(%12%07MB_hP!%22+%01C_j%25~%07%14%0B%08%02*%17-I%07%11)%07o%1E5Y%10I#D%22%0Aj%1A%17%04%19V!%09p%10%5CM%5B%0ErH%06VUH%5B%19qHtPPRBM4%10*%0D%04M%09%07p%09%7FIQ%0A_FsIrWDU%13GsHrUHL%18%01*%0C%20%09I%07%1AE2Q8%02%00%16%0EVkH%0CRPPXFvHvWRH%5B%0ErA%02%22TT%5D4jB!%10R%14V%5Es%00qQQP%5DSs%17qQQUXFjC8%13%04%11%1E%04-X%0B8W%150%04%226+IH8C_%18%12w&%08MB+%18%1E5Y%108P%0B!%0A&%00%0A%5E%08%170%1DcIQ%0AZFsHpSP@%5DCvOzH%5B%07%1AE2E%25%15#%14VK~PhJ:N0+%1E#h:%3C8F%5DbS%18%3CHZCF%0CKwVQT%5BGrHeQ%19Q%5DE%02Or%25H_CF,LsQPQ%5BSuMvWTLP%141%1D%22%0AZ%18%0D%02%01%09~5+%08%02%5Ej#)%16X%15C_%1E#9%0A9%0DC_%1EP%25%15#%14G&u23IHLP%15,%160%15A!3C2E)W%05%0FC_h,%09%0C%08MB-)%0Fz%11IL6-%0F(0%0CIL6%5E%25%0C%01%10NM@-%1ESbJ:8@%5EhS%18J:86-h#%1EJ:86_jUk5V.%04%5EjQo%07%15\'%1A_n%3C%05%08%0CMBM5%191A9%0E2%07~Ps%19SU%5B@%06%5Ds%0ESU%5BFwMjZ%16%0D%02%1A&P%1B%0A8%14W%5EqNqRTRNF,JsQQP__j%0B4%08%15%06%03%5E%1B%13%1A%10H%1E%08%170%1DcIQ%0AYFwOpQLU%13GsA%01UH_3%1D%1A%09~%07%15\'%1A%5Dk%206V%02MB_%7FPh::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:N0+%1E%25j%5EIU%04GsHsPSQN@vMvUH_CF;KsQ%20UNF,JsQQPZ_x%1A1%04%00%0EP%15%22%0B&AIU%04BsHsTW@%5B%0ErHsPPLQ.(!2%5CIU%13DsHuVDU%04DsHsUPLP%0D5%191A%1B6%5B%07~PuVWW%5D%5Bs%17qQUUYAjC4%09%08%09%0E%5E9+s%10%5DM%5B%0ErHuXQH%5B%19qHpPWQB_0%0F*%15%02%0DC%0C%10H2H%1A%06%0A%05&XkQ%0EW%5BEqMuLQ%1DZFuA%01H%5B%1F8F2E%0BS%00%17T%5Es%17qQQQ%5BBnNvVYVBLkNuWTSFF,JsSPU__x%1A1%04%00%0EP%15%22%0B&AIU%04GsHsPSPN@vMvUH_%11%25s%09~IQ%1DZF%00H%7BLQ%0AYFvOvUH%5E%10%3Eq%191IH%5E%19%137%0D1%0FA-2@3#k%07%0D%11%04%5EjQhI)%1C%09%1CkQj%3CIL0&%0C/(IH8C%107:2M%07%13S%07jC%3E%03%13%00%0A%1Dx%05%3E%03%13%00%0A%1Dx%051%04%15%10%19%18c%02%12%15%10%3E;9%14%13kH%3CM/.v%09o%07%17%5D%1AZ%0BJ%22%13H%5E%16M%25%0D-%02%15%0C%04%18c,%255%10MB%0D1%1D7%14%13%0BK%5E%1B%0Dt%02ILB%5Dk(sY%0FMB_%3E%1E6%0F%02%11%02%19-X5/7%14C_8%0A&%15%14%17%05Vk%0C:%11%04%0A%0DVk#%1EJ:8B_%18SbJ:8@Wh#%1EJ@N0+%1E%05%25%14%0F%06%1F%1F,%16c9%024%04%5Ej%031%04%15%10%19%18c%3C%25%0F%07MB%5D%13%1F3%12IL@&6;%25IHN/%1E%16%1EkHJ%13/%11,PjJ1%02%1B%05kQh%17%03*%0C%5EjS%13%06%11%16C_h%0A%20%0A%08MB%0B%25%0D-%02%15%0C%04%18c%02%082%0EMB%0D1%1D7%14%13%0BK%04q=%25IHN%05%049%16kHJ!%03#%25PjJ-%038%15kQ%3E\'%103%25-%13?%0C%08IL6Kk%1E%05%09%05MB_n0%128%0FMBM%25%0D-%02%15%0C%04%18c,t*%0EMB%0D1%1D7%14%13%0BK%5Ek(0T%04MB_iPhI:N0-bS%18%3CJD@-%1E%25h:J%3E6+%1E%25h:%3CL0%5D%18%25%1EHHNC%5D%18#h::N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_%3E%1E6%0F%02%11%02%19-X5\'/%0AC_8%0A&%15%14%17%05Vk(%06%09%08MB_hP!%087%0AC_j%05%25%14%0F%06%1F%1F,%16c1S#%04%5Ej%031%04%15%10%19%18cP1%14V%08C_j#)%08%10%08C_%1EP%17)1%0DC_j%05/%04%15E%197%0A%17~1$%0D%02%5EjSk5+%08%02%5EjGh:%3C_@%5E%18S%18:@N0+hYh:%3C8@-h#%1E%3C%3C8@-%1EQ%18J:%3E@-%18S%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3C8BM%25%0D-%02%15%0C%04%18c4%1B%20%0EMB%0D1%1D7%14%13%0BK%5Eh#%18J:%3E@Wh#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:N0+%1E%25jJIM3%03t%1BkHHOC&%06%10*IHLB%0B%25%0D-%02%15%0C%04%18c%165%25%0EMB%0D1%1D7%14%13%0BK%5E!@%25%0CILB-)%112%0CIL6%5E%0B%11%15%04ILB%0B%25%0D-%02%15%0C%04%18c%16;%00%11MB%0D1%1D7%14%13%0BK%5Ek%126%22%11MB_iP%0B%16$%0CC_jQhI1%16%5E%13kQj%1C%07%10%05%157%11,%0FA5_%153P)%12T%0AB%0D1%1D7%14%13%0BK.%021&:%0B%16%5E%19%1EC%3E)8S%1B-1%19%0D%09IL6%5Ej#k5\'%0C%03%5EjQhI)%16*%1EkQj%3C%5C%03%1E%18%20%0C*%0E%0FMB%0D19%0A%0E%5CM%197%0A%17hIQ*ZDrKsSTTNEjQfI%0F+%3E%15kQjZ%13%00%1F%031%16c\'%103%25X7,%10(/%02\'?%18%0A%02(%0E8U%5E%07%3E*%0CILBM%3EC%25%14%0F%06%1F%1F,%16c-;R%04%5Ej%031%04%15%10%19%18c%3C+4%07MB%5D%13%1F3%12IL@%00t2%25IHN?%1A6%0BkHJ1%07%030PjJ-%038%15kQh%13%02%0E%02%5EjS)4P%03C_h%161%1B%0FMB%5D%070%13%0CIL@:%25+%20IH%18%0D%03-%1B7%08%0E%0BK%10-H,IH%1E%19%137%0D1%0FAMC2%05%11.IHLA%5EhYh:%3CNJ%5D%18%25jHJM@-%18S%18:JD0+hYh:%3C8@-h#%1E%3C%3CN0+%1E#h:%3C80%5D%18%25%1E%3CH%18%0D%03-%1B7%08%0E%0BK%3E%16J,IH%1E%19%137%0D1%0FA!#&.PjJ5%09%1E%05kQh%17%03*%0C%5EjS5/7%14C_h%0E9%02%0FMB%5D%07%10%16%07IL%16%3E%1AN3:I%03%07%02,PjHJM#%0F!%12kHH8C_%18%02,P%08MB+~P)W%05%0FC_jU%07%15W%0CC_x%1E6%0F%02%11%02%19-X!%087%0AC_8%0A&%15%14%17%05VkS%18:J%3E0%5Db#%1EJ@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_hPkJ@N0+hYh:%3CLA%5E%0FK!%10ILB_%3E%1E6%0F%02%11%02%19-X%0719%0AC2%11%0D3M%07%15%13%06j%03/%04%15E%11;3%08~LJD@-%1EC5%00%13E%09%1D0%08~IQ%0AZFsHrSW@%5DCvMwHZ%1E%07%137X5)%0A%15P%01+%11/%04I%07%00%053DkQ%0EQ%5BFrKwDWP%5E@pQj%1A%12%12%02%02%20%10k%03%0A%16%1B_8%1B%22%12%04ECF%0CKwVQT%5BGrHeQ%19Q%5DE%02Or%25H_%09%1D0%08~IQ%1DXFsNuDQ%0AYFsHpQH%5E%1D%3E(%08hJZ%07%19%13%22%13x%02%00%16%0EVkH,SQTZEsUuWPU%5D_y%1A(%12%11X%1D%3E(%08%7F%253%10%1BX/%1D-%06%15%0DT%5Es%17qQVT%5DBnH;PQ%20_0jBkQ%0EQ%5BFrJuDQ%1DZFsI%7BHZ%07%19%13%22%13x%02%00%16%0EVkH;UQU%5D7fH,SQU%5BDtQy%03%0A%16%1BKkH,SQW%5CEwUs%19PU%5E4%06Qx%17)%0E%1BKh#%18J:%3E@-%1E%25h:J%3E6+%1ES%18%3C%3C%3E@-%1E%25%18J@N0+%1E%25x%03%13%00%0A%1Dx%1B%22%12%04ECF,JsSPW%5D%5BuNuQXLQ%14(%0B3%5CIU$ErMpQTU%5E@pUs%19P%5C*5vIu#H%5E%10%00%22%0Ac9%04%0B%1BKkH;PQP%5CNnH,SQW%5EBwQx%16%09%0C%07%13k%20&%0F%11YCF,JsRTQY%5Bs%00rQVQ/_j%0B4%08%15%06%03%5E%1B%1D-%11H%1E%08%170%1DcIQ%0AZFsHrTU@%5DCvM%7BH%5B=%0E%183E%073%14%150%00%0B%133%3C%5CXV%103%003:J%3E0%5D%18#h:%3C8@-h#%1E%3C%3CN0+%1E#h:%3C80%5D%18%25%1E%3C%3CZCF%0CJuURPXAvOfYH_CF,JsUQS_%5Bs%00rQYT-_x%1A1%04%00%0EP%15%22%0B&AIU%13O%07@%07$UH%5B9wOpQWRXCjB%1B%04%0F%15V%5EqNqSTVNF,JsQQW%5D_x%0A&%15%14%17%05V50(%11Z%18%16%141%1D%22%0AZ%18%16%0B1%1D7%14%13%0BK%0C%0E%083Z%1C%03%1E%18%20%0C*%0E%0FE%195%25%08kH%1A%17%0E%026%0A-A%0F%13/%19kQh%03%00+%06%5EjS%25%13U%15C_h%12%10%14%07MB%0B%25%0D-%02%15%0C%04%18c,z%09%11MB%0D1%1D7%14%13%0BK%5Eh#%1EJ@N0+jSkJJ%3E@-%1E%25%18J:86%5DkSh:J%3E6+%18S%18%3C%3CLB%5DkSbJ:8@%5EhS%18J:86-h#%1E%3CHL%16%22%1BM/IH%5E%0D%03-%1B7%08%0E%0BK%22!(3IH%1E%19%137%0D1%0FAM@%5EkPh@J%3E6_h#%1EHJMCWb#%1EJ:8B-hYh:%3CNJ%5D%18%25h@J%3E6+jSkJ@N0+jSkJ:8B%5DkS%18%3CHNC%5D%18%25jHJ%3E6_%18SbJ:8@Wh#%1EJ@N0+hYh:%3CNJ%5D%18%25h@J%3E6%5DbS%18%3C%3C%18%0D%03-%1B7%08%0E%0BK%00%09*3IH%1E%19%137%0D1%0FAM#%1F%15%1DkHH%3E%01%1F2%15kH%3CM?%3E%13%10kHH%18%0D%03-%1B7%08%0E%0BK&u23IH%1E%19%137%0D1%0FAM@Wh#%1EHJMC%5DbS%18%3CJM@%5D%18S%18%3C%3C%3E@-%1E%25jHKM#\'%1A%16kHHL%16%106%16%20%15%08%0A%05V1=%0E%11IL%10%04&%0C6%13%0FE;7\'%10kHJ%13%099$PjJ%253%12%07kQh%03%00+%06%5Ej%05%17-5%0CC_x%1E6%0F%02%11%02%19-X%0FP$%15C_8%0A&%15%14%17%05VkPkJ:8@Wh#%1EHNM@Wh#%1EJ@N0+jQh:%3CL0%5DbS%18%3C%3C%18%0D%03-%1B7%08%0E%0BK%18903IH%1E%19%137%0D1%0FAMC%5Dh#h:%3C80%5D%18%25%1EJIN@-h#%1E%3C:N0+%1EQjKI%0B%13%173PjHHNC%5D%18#h::N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h@J%3E6+%1EQ%3E%07%14%0B%08%02*%17-A)2%11%06kQ8%13%04%11%1E%04-Xk:%3C%3E%0D%1E3%16kH%3CN0+j#%0B08%0BC_%1E%05%0B8W%150%04%226+IH8C_%18%16!%0B%0BMB+~%1E6%0F%02%11%02%19-Pj%1A5/%06%1FkQx%1CZ%03%1E%18%20%0C*%0E%0FE%01%03%00%08kH%1A%17%0E%026%0A-AINC-h#%18@J%3E6%5DbS%18%3C%3CN0%5D%18%25%1E%3C%3CN0+j#h::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3C%3CLA%5Eh#%1EJ@N0+jSkJI%3E@-%18Yh:%3CNJ%5D%18%25%1EJ:N0+%1E%25%1EJ:8B-h#%18J:%3E@-%1E%25h:J%3E6+%1ES%18%3C%3C%3E@-%1E%25%18J@N0+%1E%25%1EH%1C%03%1E%18%20%0C*%0E%0FE\'%224%16kH%1A%17%0E%026%0A-AIN0-h#%18J@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_hPhI:N0-bS%18%3CJD@-%1E%25h:J%3E6+%1E%25h:%3CL0%5D%18%25%1EHJM@%5E%18S%18:@N0+hYh:%3C8@-h#%1E%3C%3C8@-%1EQ%18J:86_%3E%1E6%0F%02%11%02%19-X-%13%1B%0BC_8%0A&%15%14%17%05VkY%18%3CJ%3E6_%18SbJ:86%0B%25%0D-%02%15%0C%04%18c0%0C%13%0FMB%0D1%1D7%14%13%0BK%1C%0A(%20IHN%11%11%17%1FkHJ!%0D%18%25PjJ9W%0A%1BkQ%3E%0B%025%00%5EjC%25%14%0F%06%1F%1F,%16c%0B%0C%10%05%5Ej%031%04%15%10%19%18c,/%14%12MB%5D-%0A9%0FIL@%04%20%13*IHN%1D%0C%20%16kHJ!#&.PjJ-%038%15kQh%03%00+%06%5EjS%13%14%22%03C_h%3C+4%07MB%0B%25%0D-%02%15%0C%04%18c%3C%09%0C%0FMB%0D1%1D7%14%13%0BK%106%16%20%15%08%0A%05%5Ej%03%3EZ%1C%03%1E%18%20%0C*%0E%0FE%0D%1E3%16kH%1A%17%0E%026%0A-A%25%03%05%10kQh%17/3%1A%5EjS%13%14%22%03C_h%0A0%20%0CMB%0B%25%0D-%02%15%0C%04%18c%02%06%09%0FM%09%15(%16o%03%047%05Z%074%17%0FM=S:-Q8%02%0E%0B%18%02c%02%04.%0FX%19N%25%10k%03%02%0E%05Z!%1B(%0FO%09%0E%18$%0C+LINJ%5D%18%25jHZ%09%0E%02c,p&%0FX?%12.%09k%03%047%05%5BkS%18:J%3E0%5Db#%1EJ@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_o%02%04.%0FLP%1A&%0Cc%17#/%05K%1B@%0F%0FZ%13%0A%04c(%1A#%0FXCF;LsQWPNF,JsQQWZ_x%03/%04%15E%19%01%06%16x%16%09%0C%07%13k(%1A#%0FYCF,JsQTSY%5BuM%7BWXLB%0D0%0F*%15%02%0DC&%1A:-H%1A%06%0A%05&XkQ%19T%5B7vHnQ%0EW%5BCsMtH%5B524-EkQ%0EQ%5BFrMsDWP%5EAsQx%13%16%20%05KhS%18J:86-h#%1E%3CLNJ%5D%18%25x%03%13%00%0A%1Dx%1B%22%12%04ECF,IsQQWXFfNvTWPBL%13!%01%0F%5C%17%1C3-D!%043%0BF%5Eh#%1EJ@N0+jGkQ%0ES%5BFsOtDWP%5ECpQyIQ%0AYFqIqWLS%5D@sAjZ%03%17%0E%17(C%20%00%12%00K%5Es%17qQPPZFnNuRWQBL%13!%01%0F%5CM%5B%0ErHs%20QH%5B%19qHsSSUBM8%1B,%0F%12%11K%04:%1A,%5C%03%06%00%18%18%0A4$%0F8P%22p?-%5C%13%5D%0D%1Ek,p&%0FI@-%18S%18:@N0+hYh:%3C8@-h#%1E%3C%3CN0+%1E#h:%3C80%5DbS%18%3C%3C8G%00%012-LINJ%5D%18%25jHJ%17%12%14,S1Y%07%0DC%22p?-M%17\'!%18jC5#+%0BV%5E5:%09%0FK!\'%22-Qf%03%047%05M%3E%1A1%04%00%0EP%15%22%0B&AIS%5ENvNnQ%0EW%5BFwNsH%5B524-EkQ%0ES%5BFrMtDWP%5E@rQx%13%16%20%05%5DhC!%13%04%04%00M%3E%05%3E%02%0E%0B%18%02c,v%05%0EX/&%1B%17k5R%22%05Z9?%0C%0FH%5E%1D%171X-%15W%0BV%5Es%17uQQWZFfNvTVUBM4%10*%0D%04M%05%02u%16%7FIWSREuUs%0ESUYCqMjH%12%12%02%02%20%10k%0F%15S%05_8%1B%22%12%04ECF,NsQPQZSs%00rQQT%5E_y%167W%0FX?C\'%17%7D%5CJ%3E6IkH,WQU%5BAp%5Ds%19PU%5BF%07QyIQ%1DZF%05H%02LQ%0AYFtKwVH%5E%09%04&%19(Z%02%04%18%13cPs%0ESU%5B@qHnQ%19T%5BGt;j%5B%0F%11%5D%18~Ps%19PUSEwUs%0ESU_FqIjZ%1A1X1-E1Y%07%0DC%22p?-MJ%3E6Z%17M\'%0EH%5E%16%141%1D%22%0AZ%18%19%137%0D1%0FA1X1-C%3E\'%103%25X$A3%22%5C%03%1E%18%20%0C*%0E%0FMB%0D1%1D7%14%13%0BK%5EuAtRWH%5B%19qIsPQPB%0Bx%1E6%0F%02%11%02%19-X%13QY%0BC_8%0A&%15%14%17%05Vk%206V%02MB_hP%0F#+%0CC_j%05%25%14%0F%06%1F%1F,%16c%0B%0ET%05%5Ej%031%04%15%10%19%18c,/%14%12MB%5D%1BJ%22%0CIL@%0C%0C/3IHN%09%17%0D%15kHJ%1F%02%07+PjJ%17%1D-%1BkQh%03%0C?%1B%5EjS!%00/%08C_%3E%1E6%0F%02%11%02%19-X%0F7R%0BC_8%0A&%15%14%17%05V-%0E%07%0EIL@%00t2%25IHN%19/%02%1DkHJ%13%11%15-PjJ%07%17_%06kQ%3E\'%103%25X$%1A%1B%22%5C%03%1E%18%20%0C*%0E%0FMB%0D1%1D7%14%13%0BK%5Es%00pQQPYSs%17qQQUYEj%05x%07%14%0B%08%02*%17-A%07%0F%3C%18kQ8%13%04%11%1E%04-X)2%14%03C_h(q\'%0EMB%5D%0F%1E%10%02IL@&6;%25IHN/%1E%16%1EkHJ%13\'%192PjJ%25%0D%3E%10kQh1%06%15%18%5EjS1%02%0A%0CC_h%161%1B%0FMB%5D%0F%16s%04IL@:%25+%20IH%18%0D%03-%1B7%08%0E%0BK%3E%12!-IH%1E%19%137%0D1%0FAM@Wh#%1EJ@N0+jSk5V.%04%5EjQ%3E%07%14%0B%08%02*%17-A)6%1D%19kQ8%13%04%11%1E%04-X%0F%072%06C_h(6%22%07MB%5D%07%10%16%07IL@%04%20%13*IHN%1D8%15%09kHJ)%0D%25%20PjJ%25-;%1BkQ%3E%07%14%0B%08%02*%17-A%0B%14%12%19kQ8%13%04%11%1E%04-X%1B%16$%01C_h%02%0C6%11MB%5D9%1B%13%07IL@%1C%10%0D%25IH%18-%07%156m((?(K%25%0D-%02%15%0C%04%18kQ8%13%04%11%1E%04-XkQ%0EQ%5BFsOwDQ%1DZFsItH%1C%5E%0D%03-%1B7%08%0E%0BK2%0D%09,IH%1E%19%137%0D1%0FAM%05%049%16kHH%3E\',t%17kH%3CMB%0B%25%0D-%02%15%0C%04%18c%1E/%15%0EMB%0D1%1D7%14%13%0BK%0C%02%1C.IHN/%3E%13%15kHJ!#&.PjJ9W%0A%1BkQ%3E%07%14%0B%08%02*%17-A%1B,%07%19kQ8%13%04%11%1E%04-XkJ@N0+hPhJ:N0+%1E#h:%3C8B_hP%07%15W%0CC_j%05%05%107+E%15u*%00%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FEC@tNzWLU%04DsLrPUL%16M%25%0D-%02%15%0C%04%18c%1A$%0E%0EMB%0D1%1D7%14%13%0BK&6;%25IHN;%113%0BkHJ=%0A%1C,Pj%1C%07%10%05%157%11,%0FA%13/%11,Pj%1A%13%00%1F%031%16cI:80%10+%08-IH8@-%1EQ%18J@N0+hYh:%3CNJ%5D%18%25%1E%1C%07%10%05%157%11,%0FA=%0A%1C,Pj%1A%13%00%1F%031%16cI5%17%11%12kQj:%0B%0C%1A%1BkQ%1EI%03%5D%0D%1BkQj%1C%07%10%05%157%11,%0FA%1F*%12.Pj%1A%13%00%1F%031%16cI%25%03%05%10kQj:-?%5C%19kQ%1EIH%18-%07%156m$%250(K%25%0D-%02%15%0C%04%18kQ8%13%04%11%1E%04-XkQ%0ET%5BFsKqPDS%5ECtAj%1CZ%03%1E%18%20%0C*%0E%0FE%09N%25%15kH%1A%17%0E%026%0A-AIN0-h#%18J@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_hPkJ@N0+hYh:%3CLA%5E9%1D.%06ILB_%3E%1E6%0F%02%11%02%19-X5%17Y%09C_8%0A&%15%14%17%05V%172.%08IL0%0C%08+,IH80%14$%17,IH8C_x%05%25%14%0F%06%1F%1F,%16c9S%04%06%5Ej%031%04%15%10%19%18cP%13%06%11%16C_j#%0F;V%0AC_%1EPj%1C%07%10%05%157%11,%0FA%17%1AE/Pj%1A%13%00%1F%031%16cIFB0.%20),IH8C_j#)W%05%0FC_%1E%05%05%107+E#%150%00%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FECF,JsUUU%5D%5Bs%00rQY%20%5E_%3EC%25%14%0F%06%1F%1F,%16c59P%07%5Ej%03%0B8W%150%04%226+IH8C_%18P!.7%02C_jSk%0F;S%0D%5EjQ%1E%5C:8P%00%22%0Ac%0F%0D%3C%07KkH,SQPXBuUuYS%5C%5E_x%03/%04%15E;%25s%14x%16%09%0C%07%13k%16/8%0DYCF;KsQY$NF,JsQQQY_j%030%16%08%11%08%1Ek%16/8%0DL%10%15%22%0B&AIU%13GsJ%01%22LU%04DsIqRPLQ%18/!/%5CIU%04GsHsPQRNF;IsQQ#BM%13+s%0DJNP%141%1D%22%0AZ%06%0A%05&XkPXS%5D@u%5Ds%0ESU%5BFrLj%5B%0F%092%1A~Ps%0EPU%5BFqNtDQ%1DZFsJvHZ%1E%08%19-%0B7A10%13%1B~,%09%0C%08MB-)%0Fz%11IL6-9%13%1B%09IL6%5E%05%09%15/:M\'2$%12kHHNC%10%17H$IHL6Z%0B!u%11:M%0D%1A7%17kHHNC%3E:%1A)IHL6%5Ej#k%036V%02%5EjQhI%13%20&%06kQj%3CH%19%17%5E%1B%0Dt%02ILBM%0B!u%11:%17%0A8+Pj%3CIL0%18%0742IH80.%0C%0A*IH8C%22%09%15*IH%3E%01%01z%08kH%3C%3E3;%16%10kH%3CM;#;%15jK5/%06%1FkQ%18%0B%16%5C%1B%5Ej%25%185%25)%0C%5Ej%25k5+%08%02%5Ej#)%16X%15C_%1E#5%05%0D%0DC_%1EPjKI%0FYO+PjHJM@%5D%18S%18%3C%3C%3E@-%1E%25hIJN0%5D%18%25%1E:J%3E6+jUh@J%3E6_jSk%25\'%0C%06%5EjQjZ%1C%07%19%13%22%13x%02%00%16%0EVkH,WQUYBu%5Ds%19PU%5BD%07Qy%0F%0D%3C%07KkIpPPURSs%17qQQUZCjC%132Q%09V%5D%18#h::N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86M!%0A&%00%0A%5E%08%170%1DcIQ%0AZFsHrSV@%5DCvMvH%5B%0B%07//E%132Q%09W%1CqA+IHZCF,IsQQT%5BDfH;PQU%5B4jBkQ%0EQ%5BFrMuDWP%5EApQx%03%13%00%0A%1Dx%05%3E%1C%1C%03%1E%18%20%0C*%0E%0FE%19%05%02%15kH%1A%17%0E%026%0A-AI%3E6-%18%25%1EJ:8B-hS%18JJ%3E0+%1E#h:%3C86-h#%1E%3C%3C%18%0D%03-%1B7%08%0E%0BK:%13%0B.IH%1E%19%137%0D1%0FA-%20%18.PjJ%0F%17%11%18kQh%0F%17!%04%5Ej%05%05%107+E%0173%00%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FECF,IsQQT%5BBfH;PQU%5B3j%05x%07%14%0B%08%02*%17-A%0F%0B%1D%1BkQ8%13%04%11%1E%04-X%07%094%03C_h($%11%12MB%5D%0B%15%19%07IL@&$%080IHN3%17)%17kHJ)%0D%25%20PjJ%13%06%00%1FkQh%0B4T%0D%5EjS5%1B%02%0BC_h%161%1B%0FMB%5D%070%13%0CIL@:%25+%20IH%18%0D%03-%1B7%08%0E%0BK%3E%08%16.IH%1E%19%137%0D1%0FAM\'.%02%17kHH%3E%01%1F2%15kH%3CM?%3E%13%10kHH%18%0D%03-%1B7%08%0E%0BK%1C*%09.IH%1E%19%137%0D1%0FA!%03#%25PjJ1%02%1B%05kQh%17-%0A%1A%5EjS%07%094%03C_h%0A%20%0A%08MB%5D56%15%10IL@&6;%25IHN\'%18s%1DkH%1C%03%1E%18%20%0C*%0E%0FE/0*%15kH%1A%17%0E%026%0A-AIM@-%1ESbJ:8@%5EhS%18J:86-h#%1EJ:86_jRk5V.%04%5EjQjJIN0-h#%18@J%3E6%5DbS%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3CL%1602.%0DO86.7~%1E6%0F%02%11%02%19-Pj%1A%13%00%1F%031%16cIQ%0AYGrMrULR%5BBp@j%1CZ%03%1E%18%20%0C*%0E%0FE%0D%12/%15kH%1A%17%0E%026%0A-A%25%03%05%10kQh%13%02%0E%02%5EjS5%1B%02%0BC_h($%11%12MB%5D%0B3-%0CIL@%1C%16I%25IHN%05%1E%16%13kHJ%0B%19%0C-PjJ%13%06%00%1FkQh%0B4T%0D%5EjS%13%06%11%16C_h%0A0%20%0CMB%5D%0F%1E%10%02IL%16%106%16%20%15%08%0A%05V%25%1E%10%0CIL%10%04&%0C6%13%0FE%1D2$%17kHJ5%0C%060Pj%1C%07%10%05%157%11,%0FA-&#.Pj%1A%13%00%1F%031%16c9%00%0F%04%5EjS%1B%00%0B%0AC_h%0A2R%0DMB%5D5M%20%07IL@:r=3IHN3%11%16%08kHJ%1F%08&%25PjJ1%0E3%15kQh%17-%0A%1A%5EjS1U%03%02C_h%1A%22/%0CMB%5D%07%10%16%07IL@%04sO&IHN\'%10%10%1BkHJ%17%08%1D*PjJ%25%03%05%10kQh9%060%1B%5EjS%17%11S%06C_h0%14%1B%11MB%5D-%0E%07%0EIL@2%0B(.IHN?%1A6%0BkHJ1ZO.PjJ1%10(%10kQh%25%090%0D%5EjS%1BS%00%08C_h%0E%0D7%10MB%5D1%1B(%08IL@&%02%1C+IHN;7\'%10kHJ%0F8%03%25PjJ%1B%02?%11kQh%1B%061%0C%5EjS%13S\'%0AC_h%16+4%0AMB%5D5%22%01%05IL@%22rA.IH%18%0D%03-%1B7%08%0E%0BK%14%226.IH%1E%19%137%0D1%0FAM%1D8%15%09kHH%3E\',t%17kH%3CMB%0B%05%09%15/O0%25%0C%02E%25%14%0F%06%1F%1F,%16kH%1A%17%0E%026%0A-AIU%04DsLvUQH%5B%0ErHzUSL%16M%25%0D-%02%15%0C%04%18c%3C%0B1%0CMB%0D1%1D7%14%13%0BK%5Eb#%1EJ:8B-hYh:%3CNJ%5D%18%25h@J%3E6+%3E%1E6%0F%02%11%02%19-X%1BU)%08C_8%0A&%15%14%17%05VkP%1B%14V%06C_jRk%0B%14&%1B%5EjQjJINJ%5D%18%25h@J%3E6_%3E%1E6%0F%02%11%02%19-X9%22*%08C_8%0A&%15%14%17%05V1%0B%02%0CIL@%1C%0A(%20IHN?%1A6%0BkHJ=Y%17.Pj%1C\'%14=8m%0F/%22%20X%0D%03-%1B7%08%0E%0BC_8%0A&%15%14%17%05VkH%0CRUR%5BGsIrQGU%13BuK%02VP!B%0Bx%1E6%0F%02%11%02%19-X%17;%22%08C_8%0A&%15%14%17%05V7%10*%12:M%0D.w%10kHHNC%0C%003.IHL6M%3E%1E6%0F%02%11%02%19-X5%19\'%08C_8%0A&%15%14%17%05Vk%0C:%11%04%0A%0DVb#%1EH:N0+%1E%05%25%14%0F%06%1F%1F,%16c%17%1B%06%05%5Ej%03%20%0E%0F%16%1FV%1BN&%0F%5C1!%1B*Pj:%0F1%1D%13kQ%1EZ%13%00%1F%031%16c9W%00%05Ik%20u%04%0FN0+j#5%17Y%09N%18z4*IH8Q%04%7B%1E+I9S%0E%18h#%1EM%0F%1D%0A%06kQjZ%1C%03%1E%18%20%0C*%0E%0FE%19%03t%15kH%1A%17%0E%026%0A-AIM;%05v%1DkHHOC%18z4*IHLB%5DkSh:J%3E6+%18S%18%3C%3CL%1602.%0DO0,%1E7~%1E6%0F%02%11%02%19-Pj%1A%13%00%1F%031%16cIQ%0A%5DFsJpVDU%13GsHqYH%18P%106%16%20%15%08%0A%05V%17Iz%0CIL%10%04&%0C6%13%0FEC-%1E#%0B2%17%0AC_%1EPjJ:8B-h#%1E%3C%1C%03%1E%18%20%0C*%0E%0FE%05%06q%15kH%1A%17%0E%026%0A-A5/%06%1FkQ%18%0B%0A=%06%5Ej%25x%1C%07%10%05%157%11,%0FA5%3CB.Pj%1A%13%00%1F%031%16c%13QR%0E%5EjS%13%14%22%03C_h%1A%0A%0A%07MB%5D%13%0D%00%07IL@&$%080IHN3%17)%17kHJ5%1E5%25Pj%1C\'%14=8m%17\';%20X%0D%03-%1B7%08%0E%0BC_8%0A&%15%14%17%05VkH;SQU%5EOfH,SQU%5BEtQ%3EZ%07%10%05%157%11,%0FA%0F%00..Pj%1A%13%00%1F%031%16c%17-%0A%1A%5EjS%07%094%03C_h%0A%20%0A%08MB%5D56%15%10IL@&6;%25IHN\'%18s%1DkH%1C%03%1E%18%20%0C*%0E%0FE\'$%19%15kH%1A%17%0E%026%0A-AINC-h#%18@J%3E6%5DbS%18%3C%3CN0%5D%18%25%1E%3C%3CN0+j#h::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3C%3CL@%5Ek%206V%02MB_iP9%04%0C%02C_jQ%3E%07%14%0B%08%02*%17-A%0F%0D%3E%1DkQ8%13%04%11%1E%04-Xk1W/%1B%5EjQ%18%0B%08%14%06%5Ej%25k%07%1B%06%18%5EjQ%3E%07%14%0B%08%02*%17-A1*%3C%1DkQ8%13%04%11%1E%04-X1W(%02C_h%3C+4%07MB%5D%07%10%16%07IL@%14%226.IHN/%1E%16%1EkHJ5*%12+PjJ%17%07$%11kQh%03%00+%06%5Ej%05%05%107+E\'%08I%02%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FECF,JsRPSY%5BuOrVPL%16M%25%0D-%02%15%0C%04%18c%12%201%0AMB%0D%20%17-%12%15E\'%3C%11%13~I%07%10%05%157%11,%0FIL%10%1A&%0Cc%07V/%00K%07%3E*%0CILVK~P)%14%22%15C_h0%128%0FMB_x%0A&%15%14%17%05V%25%0D-%02%15%0C%04%18k0%06,%0AI%09D%06%13j%1A%0D%00%1FV%07%02%0B%0A%5C%03%5C%3C(G%25%14%0F%06%1F%1F,%16kH%1A%13%0A%04c%3C%01%04%0DXCGzNtUU@%5B%19qHsQUVBM4%10*%0D%04M/4&%14%7FIQ%0A%5DFsItRDU%13GsHr%25HL%18%01*%0C%20%09I!)%13/Q8%02%00%16%0EVkH;PQQ/NnH,SQWYArQy%25#%00%07K!J%06%0A%5EM%5B%19qHqPPQF@uNqTH_CF,JsSQR%5B%5Bs%00rQUT__x%1A1%04%00%0EP%15%22%0B&AITR@uNrDQ%0AYFsHrWH_/4&%14~IQ%0A%5DFsJrTDS%5ECtIjZ%1A%06%04%180%0Cc%07X%02%07K!J%06%0A:1%13%17%25Pj%3CI-.;(T%22%13%06%10%06%13-%0C0HZ%07Y3(E-%14%0D%09P%04&%0C6%13%0FE%0DO$%14x%1C%03%17%0E%17(C%3E%1C%5B%03%1E%18%20%0C*%0E%0FMB%0D%3EC%25V+%0EV%5E%17O%08%0EILBH~P%0B08%0BC_jC1%04%15%10%19%18c%3C9)%0A%5E%16%0BjPjZ%02%0A%05%057X9%16X%0EV:%09*(I%15%0D%02%05o%1E6%0F%02%11%02%19-Pj%1A%02%0A%05%057X!U%03%09V%22%09%15*IH%5E%08%19-%0B7A%17%17_%1D~(2%18%04MBM%20%17-%12%15E3/u%13~%034%12%02%5EjC/%04%15E%19%1B%19%13o55T%00Z%17.:%0DM%13%1F4/C(W%0C$Q%10,%0Ak%02%0E%0B%18%02c(%12%15%0DE%02%18c%1Aw%03%0DL%10%00%22%0Ac%13%0E%12%07KkIpPP%5DXSs%17qQQU_CjC4%09%08%09%0E%5E1%174%0D%5DMZErIvSDU%04DsHsSTLB%054%117%02%09M%19%194%14j%1A%02%04%18%13cPs.RT%5EEsMsTWVFF;Iz%20%22PZ@%01Qy%13%0E%12%07KkNzRRSFF,JsVSSY_x%031%0C;%0EV&%12%0C/Z%03%17%0E%17(X(W%0C$P%0B!%0A&%00%0A%5E%08%170%1DcIQ%0A_FsIvRDS%5ECtIj%5B%13%0A%1C%1A~(%12%15%0D%3E%1D%04w%13%1E%5C%5CXC%3E%12!-IHLMP%13)7%0D:=2@(%25k1$%0D%02%5EjQ~%5C%5CM3%1F1%09kHHCM&%12%0C/:9%3C%5D%1D%1EP%0F5%16%0BC_jE~%5CI!%1BD+PjHGC;\'7%14%1898S%00+k(0T%04MB_~E~I%0B.%06%12kQjGG5:%02/#%1B8W%0E6%5EhS%18J:86-h#%1E%3CLNJ%5D%18%25j%5C%5CXC%18%0D-%20IHLT%5EtKuRXR%5BOfAj%5BIU%13DsHuSDU%04DsHsRWLP%141%1D%22%0AZ%18%16%15,%160%15A)\'%19/E!4%16%0CC_x=7%07%20_%0D%191P%20%0E%0F%16%1FV-%121%0DA%0C%05V!L!%0D:%17%06,(%25j%1A%17%04%19V%0B?)%0D%5CM%5B%0EqHsR\'@%5B%19qHsQPRBM4%10*%0D%04M#1)%14%7FIP%5C%5DAwOfQ%0EW%5BFsLqHH%16%1C%1F7%1B+I)%22%01%1Aj%03%20%00%12%00K%5ErAuWYSNF,JsQQT%5C_y0%04%0B%0DX%05%1C1%14%18%17%13Q%00+~E~I5R%20%19kQjGG%0B%01%04/#%0F-%0E%096%5E%0F,4%0FILBK~Ek-%15\'%0C%5EjQeG%0F%0F%19%1A%18%20%1AW%0A8C%5D%18#h::D@-%1ESbJ:86%5D%18S%18%3C%3C8@-%1E%25%18J:86-hYh:%3C86_~E~I%0F+%3E%15kQj%5EIU%04GsHsSRUN@vMuTH_CF,JsVPS_%5BuArXXLP%141%1D%22%0AZ%06%0A%05&XkSWWXGq%5Ds%0ESU%5BFwIj%5B)%22%01%1A~Ps%0EUU%5BGvMfQ%19T%5BFqLjZ%1A1?G(E-%0B%13%09P%141%1D%22%0AA%20%1F%10%02C%3E%03%13%00%0A%1Dx%05%3E%17%00%17K%1C&%15/%5CIU$DuLpTRR%5EAf@jZ%16%0D%02%1A&P)%04%0C%09W%5EuNpRWH%5B%19qHrUPQB_0%0F*%15%02%0DC%1C&%15/H%1A%06%0A%05&XkWWU%5C@nH,SQT%5BGqQy%0B%04%08%07KkH,PQU%5BGqLfWTP%5EDjC8%06P%0D*L%25%171I%02%0A%05%057X)%065%09K%1F-X!U%03%090%04.%22(%3CH%1E%1D%171X%0F/7%09V%5Es%17uQQTXGfNvTTSBM4%10*%0D%04M\'8%15%14%7FIQ%0AZFsHqRR@%5B%0ErHsP$LB%054%117%02%09M\'8%15%14j%1A%02%04%18%13cPs%19PU%5C3%06Us%0ESUXAqIj%5B-+=%1A~%12$5%0D%3E%1D%04w%13%1E%5C%5CXC%3E%12!-IHLMP)%1F%17%0D:=2@(%25k1$%0D%02%5EjQ~%5C%5CM\'%02%01%1FkHHCM%1C$,/:-)%04%1A%1EPh::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3CHXVKk%1A%10;%09MB_%7CPs%0EWU%5BGtLfQ%19T%5BFr=j%5BIS%5CO%7BNnQ%0EW%5BBvMtHZ%07%19%13%22%13x%02%00%16%0EVkNzWPSFF,JsVVT%5D_y4%0D7%0DXCF,JsRRW%5D%5Bs%00rQW\'X_x%03%177%18%09V%1C$,/Z%03%17%0E%17(X$P%09$P%0B!%0A&%00%0A%5E%16%0B5%191A%07%07$%1A~PrXWSXOfH,SQU%5BFvQx%16%09%0C%07%13k%1E!.%0DYC@zKsWLU%04DsOqRTLB%054%117%02%09M%0D%14%0C%14j%1A%02%04%18%13cPs%0EUU%5BFpJfQ%19T%5BFsMj%5B%07%07$%1A~%1Aw%03%0D%3E%19%1B%19%13%1E%5EIU%13Gs:wQLU%04DsMwTQLQ%5Es%17qQTPYBnH;PQ\'XAjC!%13%04%04%00M%20%190%04AM%5B%0ErHr$QH%5B%19qHsVPUBL%25%1A%0C%0D%5CM%5B%19qHqSPUFF;IsUW\'BM89,%00%20_%0D%191P%20%0E%0F%16%1FV%0B1%12%0DA%0C%05V!L!%0D:%17%06,(%25%1857%1C%07+j%035%00%13E%09@%0A%14~IQ%0AZFsHpSP@%5B%0ErHsS#LP%01+%11/%04I%07%5D?/DkSWWYOs%5Ds%0ESU%5BFpKjH%12%12%02%02%20%10k%03W,%07_8%1B%22%12%04ECApNpXVURSzQy%03W,%07KkH,PQU%5BGuNfQ%19T%5BFrLjZ%1A%13%1F4/E%0B(0%09P%141%1D%22%0AA$%04%17%02C%3E%03%13%00%0A%1Dx%1B%22%12%04ECF,JsVPS_%5BuArXXLQ%14u1/%5C),:%1A%18%0E1U%0A8VK~P%0B08%0BC_j%5Ee)(4%07-%0F4,%0D%3CM;3+%11kHHXVKk%3C3S%09MB_e%5E%0B(0%090.%1AN(%3CIN0-h#%18J@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h@J%3E6+%1EQ~%5C%5CM%11B%04%1CkHHZCF%0CKrTRU%5EFvNpLQ%1DZO%02;vPW\'BLkH,UQUZGu%5Ds%19PU%5BGwQx%03%13%00%0A%1Dx%05%3E%1C%03%17%0E%17(C%3E%1C%03%17%0E%17(C%20%00%12%00K%5Es7rUUS%5EAwLt?Q%1DZOpM%05SQLQ%1C&%15/%5C@MI%08aF%175P%0EBIkNtWXSFF,JsUPV%5D_yPs%19UU%5BC%00%5Ds%0ESU%5BFqJjZ%03%17%0E%17(C%3E%17%00%17K2%074/%5CIU%04DsItRWH%5D@vIvHZ%12%03%1F/%1Dk%25%25)%07JkH,UQUZBu%5Ds%19PU%5BDrQj%12%16%0C%1F%15+P%07%25-%09B%0D%20%190%04AM%5B%19qHqPPQFF;IsURSBL%07%3C%0F%0D%5CM%5B%0EwHsXU@%5B%19qHsQRQBM8%1B,%0F%12%11K.s%3C/%5C%03Q%09%1A%18%0A.;%0A80%22%17I(%3CZ%06%04%180%0Cc%1B%18%22%07KbY!U%03%090%04.%22(%3C:1=%0F/%25eG%03Q%09%1A%18%0A.;%0A80%22%15%01/%3C:%13%1F4/%25x%02%0E%0B%18%02c%1A%1A%20%0BX3F%07%14?%1D%1B%1C,%1Ax0%1AW%11%3E%19%17%0D%10kH%3CMB-9%17r%08IL6K%25%02%20%12ILP%00%22%0Ac%25%17!%01KkH,SQR%5EAsUuXUSX_x%0F+%08%0D%00C25%3C)%5DIU%13DsHtRDU%04DsHsUVLB%054%117%02%09M/%00%07%12j%1A%02%04%18%13cPs%0EUU%5BGvLfWTP%5CDjB%07%17%25%0FV%5Es%00rPPPS%5Bs%17qPQQ%5DEjC8%02%0E%0B%18%02c%20%10%17%0BX0-kH;VT%07%08%12rMnQ.RY@tLuUSPBZrNpRWWYAtMoIQ%0AZEtJpQQHXNtH%7BYHIZGsKsY%3C8P%106%16%20%15%08%0A%05V9%09:%0BI1%25%07)T5%0D%15%0FG&%0A%14)M%13%02%04%1Cj%03%20%0E%0F%16%1FV1%11%15%0B%5C1%25%07)#%0B4S%0AC_%1EP%0FP$%15C_jV.%00%11M?&%1B%12~_553%1C%18%16-%17%0CMB+kQjZ%02%0A%05%057X-%050%0FV%14w%1A/:%0B%12R%06kQ%1E:9(%3E%1EkQ%1EII1%5C=,PjHLM;3+%11kHHLA%5E5%147%0B:%13%19B(%25h%13%06%0A%01_x%0E%22%13A5%20%25)EkQ%19W%5BFqOfQ%0EW%5BFsIuHZ%1E%07%137X)Y*%0FP%15%14%1B%02%5B%16%0D%02%1A&P%13*2%0FW%5Es%17qQRQZFnNtRQUB_8%0B4%08%15%06%03%5E%133%10%0BH%1E%08%170%1DcIPVZGsMfQ%0EW%5BFsIpH%5B5%20%25)EkWVRX@nH,SQQYFqQx%0BY.%01Kh#%1EZ%03%17%0E%17(C%20%00%12%00K%5Es%17qQTS%5CFnH;PQ\'R0jB%13*2%0FV%5Es%17rQQU%5BAu%5Ds%19PU%5BF%02Qx%0BY.%01%5DhC!%13%04%04%00M%20%190%04AM%5B%19qHuPPSFF;Is%22S\'BL%133%10%0B%5CM%5B%19rHsQPS%5ESuMvTXLP%0D%20%17-%12%15E\'0%0D%12~%17%0D%11%01-)@%08%0B%3C%5E%1D%171X%25R\'%0FV%5EuOsXWH%5B%19qHpQPQBM4%10*%0D%04M%0DE%05%12%7FIWS%5EEuUs%0ESUZArOjH%12%12%02%02%20%10k%07R#%01_8%1B%22%12%04ECF,JsSPQ%5B%5Bs%00rQUP%5B_y%1Ep\'%0BXCF;IsU$WFF,JsSRTZ_x%1B,%0F%15%0C%05%03&X%206%02$P%15%22%0B&AIU%13BsHtQDU%04DsHsRPLQ%10p%3E)%5C-#%25%1C%18%0E1U%0A8W%04*.):%17%17_%1D%1EGkQ%19Q%5BFvLfQ%0EW%5BFsJrH%5BM%5B%0EqHsU\'@%5B%19qHsQRVBM!%0A&%00%0A%5E%16%00%22%0Ac)%20,%01KkIzWWR%5CSs%17qQQUZBjC4%09%08%09%0E%5E%0B9%0A%0B%5DM%5B%0EwHs%25X@%5B%19qHsQTPB_0%0F*%15%02%0DC%3E%021)H%1A%06%0A%05&XkQ%0EWZGrIsLQ%1DZGqJwH%5B-*?)EkQ%0ES%5BFqLuDQ%1DZFsJ%01HZ%06%04%187%11-%14%04E%08!%209x%02%00%16%0EVkJuSST%5CSs%17qQQUZDjB%0B%20(%0FV:%056):J%3E0%5D%18#bJ:8@Wh#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3C%3CXVKkS%18:J%3E0%5DbS%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3CLMP%0F%3E%0D%0B:%13%19B(%25b%5C%5C%17%02%20)#5%13U%0E6%5DkS%18%3CJD@-%1EQ%7CISSYD%7BLfQ%0EW%5BFsKqH%5BM%5B%0ErHrVSH%5B%19qHsTPPBM!%0A&%00%0A%5E%16%1A&%0Cc)%22%03%00K)%0D%00%11ILW%5E%17A+%11ILBM%20%17-%12%15E%01%17*%13~I-#%25%1C%18%0E1U%0A8@%5Eh#%18J:%3E@W%18%25h@J%3E6+h#h:%3C86%5D%18%25%1E:J%3E6+%18S%18%3C%3C8B_i(%0A%0D%0B%5E%1D%171X%07%19%00%0EV%5Es%17qQQW_FnH;PQURFjC8%0D%04%11K%10v%1B(M%1B%16%5E%1Cx%0F)T%1B_%1C%1E*%14&I%25%1D%0A%1D%7FPs%0EPU%5BFrJvDWP%5ECsQj%1A%12%12%02%02%20%10k%25%19%04%00_8%1B%22%12%04ECGpIrSS@%5B%19qHsQSTBL%07%00%22%0A%5CM%5B%19qHqSWUF@uOrSH%5E%0DC%20%13~-\'+%01-5%0Aw%0A%3CHC%5DbS%18%3CH%5E%11%05v%12~%13%083%01-5%0Aw%0A%3CHC%5Dh#h:%3C80%5D%18%25%1EJIN@-h#%1E%3C:N0+%1EQnJ@N0+jC!%13%04%04%00M%20%190%04AM%5B%0ErH%01UQH%5B%19qHvUTUBL%07%00%22%0A%5C%03%5E%15(FkJ:%3E@-%18S%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@-%1E%25%1EH%5EM%5DCtLuLQ%0AYFsJtTH_C@%7BLpWLU%04DsMwWVLP%141%1D%22%0AZ%06%0A%05&XkQ%0ES%5BFrKqDQ%1DZFsItH%5B!%13%17(EkQ%0EW%5BCpNsLQ%1DZF%02%3CwHZ%1E%1D%171X!QV%0FV%5Es%17uQQT%5EGfNvTWWBM4%10*%0D%04M%09Ft%12%7FIW%5C%5DOuUs%0EST%5BFwHjH%12%12%02%02%20%10k%03QR%01_8%1B%22%12%04EC@uIpWLU%04DsIrPPLQ%14sO)%5CIU%13GrHwQLU%04DrHsUQLP%0D%0B;%25%0A%5CM;%05v%1DkHHXVK%0F,4%0FILP%141%1D%22%0AA%12%01C9C%3E%03%13%00%0A%1Dx%1B%22%12%04ECF,JsRTQY%5BuOpXXLQ%14sO)%5C-#%25%1C%18%1Ev%02%0A8JK~%20%14%1B%0AM%19%1F%15%12%18%1B%12P%01+jGkQ%0EW%5BDtKwLWR%5BDrQyIQ%1DYFsKqDQ%0AYFsHrPH%5E%09%04&%19(Z%1C%18%09%04&%19(Z%02%04%18%13cPs%19PU%5EA%7BUs%0ESUYCpLj%5B%25%1D%0A%1D~PrRPTXNfH,SQU%5BDvQx%07T%06%00%5BnT9%12T%0FF%5Bx%1A1%04%00%0EP%0B%3E%055%00%13E%1D%18s%12~IQ%0A_FsIrQDS%5ECuHjZ%16%0D%02%1A&P5%0FQ%0FW%5EuNwQWH%5B%19qHrTPTB_0%0F*%15%02%0DC%00-H)H%1A%06%0A%05&XkQ%19T%5BE%00HnQ%0EW%5BGuMsH%5B%13%05F)E%0B%22%07%0ET%5Es%00pQQP_Ss%17qQQUYCjBkQ%0ES%5BFrKtDQ%1DZFsIuHZ%07%19%13%22%13x%02%00%16%0EVkH,SQQ_FuUs%19PUS0rQy%17%0FU%01KkNzQPSFF,JsWTRX_x%0A&%15%14%17%05V)%19*%0AZ%18%16%141%1D%22%0AZ%06%0A%05&XkPXS%5DAq%5Ds%0ESU%5BFrNj%5B1.8%1C~%12%7B*%0BY%1D%1A7%12%18%17%13Q%00+%7CPs%19PU(B%06Us%0ESU%5DFvKj%5BIU%13Gs:wQLU%04DsMwRULP%141%1D%22%0AZ%18%16%0B1%1D7%14%13%0BK%18\'))Z%1C%06%04%180%0Cc94W%01K9%09:%0BI%0727)T%1B2%17%0FG&u23IHI@Wh#%1EHZ#%1A%20%0D#%13.6%0EC_%1EP!U%03%090%1C.%0D-IH8C%3E%1AN3:%13%04%25%1EkQ%1EIH%3E%11%19r%11kH%3CX3#q%12jM%0BS%0F%1CkQo%1B0%11%1A-k4%15R%0FMB_hP14%16%01C_j%25jZ%07%10%05%157%11,%0FA=%3C%0C(P9%14%22%0EB%0D/%1D7A57%1E%1D~S%18:J%3E0%5D%18%25%1EJ:N0+%1E%25h:%3C80%5D%18%25%1E:J%3E6+%1EC%20%0E%0F%16%1FV5%08;%0A%5C%07%3E%01*PjZ%17%04%19V%1353%0A%5CM%5B%19qHvSPQFF;Is%20W%20BM4%10*%0D%04M;;3%13%7FIPVZGw@fQ%0EW%5BFsJpHH%16%1C%1F7%1B+I1(%1B%1Dj%03%20%00%12%00K%5Es%17qQVQ%5CBnH;PQ#Z3jB%13,%11%0EVW9%0D%00%0A:%13%19B(%25%7CIQ%1DZF%07HqLQ%0AYFuKpTH_CF;KsQWPNF,JsQQW%5E_x%1A1%04%00%0EP%15%22%0B&AISSNuNnQ%0EW%5B@pKvH%5B5&%06(EkQ%0EW%5BDrNwLQ%1DZFwL%06HZ%17%0E%026%0A-A57%1E%1Dx%055%00%13E%19%1D0%13~IWR%5BAuUs%0ESUYAuNjZ%1A%09%0E%02c4%0B%0A%0A%5E%1C%1E*%14&I%13%0E%18%1D%7FPuXVT%5D%5Bs%17qPQU%5E@jQ8%12%16%0C%1F%15+P1%0A%12%0EB%0D%20%190%04AM%5B%19qHqSWUFF;IsUXWBL1%130%0A%5C)#%1D(D9%14%22%0E0%001L(%3C%5EM%5B%0EpHs%20R@%5B%19qHsQTWBLkH;UQU%5C@fH,SQU%5BDwQx%03%13%00%0A%1Dx%1B%22%12%04ECF%0CKwVQT%5BGrHeQ%19Q%5DE%02Or%25H_%19%1D0%13~IQ%1DZF%01:%7BLQ%0AYFvNpSH%5E\'%3E(%13hJZ%07%19%13%22%13x%02%00%16%0EVkH,WQUYDw%5DuTTRX_y%0A(%12%0AXCF%0CKwVQT%5BGrHeQ%19Q%5DE%02Or%25H%5E%10%15,%160%15A%0B%0D%18(E9%14%22%0E0%003%00(%3CI)#%1D(Qx53%10%00Kk,%11%14%0AYW%5E%0F,4%0FILB_n,%11%14%0AN%05%10-%13x53%10%00K%17*6%0AG19%03(C%3E%03%13%00%0A%1Dx%1B%22%12%04EC@vAvWLU%04DsHuSWLQ%04(%0B(%5CIU%13Gs;%06ULU%04DsNpQWLP:%0B%13(%5CJ%3E0%5D%18#bJ:8@Wh#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3CZ%07%19%13%22%13x%1C%1C%18%19%137%0D1%0FA19%03(C%3E59P%07%5EjC%3E%03%13%00%0A%1Dx%1B%22%12%04ECF,JsSUP%5B%5Bs%00rQTU%5C_y%3C5%25%0BX%09/%02%12%7CIQ%0AYFtMtQLSRBuHj%5BIU%13BsH%01TDU%04DsHsUULP%141%1D%22%0AZ%18%16%141%1D%22%0AZ%06%0A%05&XkPXS%5DBu%5Ds%0ESU%5BFrIj%5B%25!\'%1A~%0A.;%0ACM%14w%1A/:%13%081%1D%1EGkSWWYG%7B%5Ds%0ESU%5BFrMj%5BIU%04DsHvTQH%5DC%7BNsHZ%07%19%13%22%13x%1C%1CLP%0C4A(IH%5E%16%106%16%20%15%08%0A%05V%13=+%08IL%10%04&%0C6%13%0FEC%5E%1B%0Dt%02ILB%5CkS%18%3CJD@-%1ESkJJ%3E@-%1E%25%18J:8@-%1E%25jHHNC%5D%18%25h@J%3E6_%3E%1E6%0F%02%11%02%19-X1%02%0A%0CC_8%0A&%15%14%17%05VkYb:%3CN0+j#h@J%3E6+%3E%1E6%0F%02%11%02%19-X%0F%1B%02%0CC_8%0A&%15%14%17%05Vk,5%25%04MB_%18%12*%10%0CMB+k(sY%0FMB_%3E%3E27/K%00N%179~%07%14%0B%08%02*%17-IH%1E%19%137%0D1%0FAM%5DNzLuLQ%0AYFuLuRH%18P%106%16%20%15%08%0A%05V-O&%08IL%10%04&%0C6%13%0FEC%5E%0F:%09%08ILB%5CkSbJ:8@%5EhS%18J:86-h#%1E%3CHLB%5DkS%18%3CJD@-%1EQ%3E%07%14%0B%08%02*%17-A)%10%5C%1EkQ8%13%04%11%1E%04-XkI1S!%06kQjKI5.%1E*PjHHNC.6O%20IHL%16%106%16%20%15%08%0A%05V)Jz%09IL%10%04&%0C6%13%0FEC%22t3,IHL@%5E%0B%19%0D%02ILB%0B%05%09%15/O(-!%02E%25%14%0F%06%1F%1F,%16kH%1A%17%0E%026%0A-AIU%13BsHvYDU%04DsHsPWL%16M%25%0D-%02%15%0C%04%18c%3C3S%09MB%0D1%1D7%14%13%0BK%5Ek%1A%7B%07%0CMB_iP%13%12T%00C_jQhIJD@-%1ESbJ:8B%0B%25%0D-%02%15%0C%04%18c%1E%1BU%09MB%0D1%1D7%14%13%0BK%0409.IHN%19/%02%1DkHJ%13\'%192PjJ%1B*%3C%06kQ%3E%07%14%0B%08%02*%17-A%07?)%1FkQ8%13%04%11%1E%04-XkJI%3E@-%18Yh:%3CNJ%5D%18%25%1EJ:N0+%1E%25%1EJ:8B-h#%18J:%3E@-%1E%25h:J%3E6+%1ES%18%3C%3C%3E@-%1E%25%18J@N0+%1E%25%1EHJM;F%7B%16kHH%18%0D%03-%1B7%08%0E%0BK%3E4=*IH%1E%19%137%0D1%0FAM@%5E%18S%18:@N0+hYh:%3C8@-h#%1E%3C%3C8@-%1EQ%18J:86_iPhJ:N0+%1E#h:%3C8@%5EhS%18J:86-h#%1E%3CHH@Wh#%1EHJM@Wh#%1EJ@N0+j%05%05%107+E?%02*%02%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FECF,JsPRW%5B%5BuNqRYL%16M%25%0D-%02%15%0C%04%18c%1A%16%16%08MB%0D1%1D7%14%13%0BK%00%07%1F,IHN%05%1E%16%13kHJ%0B%19%0C-PjJ%13%06%00%1FkQh%0B4T%0D%5EjS%13%06%11%16C_h%0A0%20%0CMB%5D5%02%20%0FIL@:%25+%20IHN/82%17kHJ!%03#%25Pj%1C%07%10%05%157%11,%0FA!%19%0C*Pj%1A%13%00%1F%031%16c1%14&%0D%5EjS%07)1%08C_h($%11%12MB%5D5%1A%0C%06IL@:%25+%20IH%18%0D%03-%1B7%08%0E%0BK.%0C%0A*IH%1E%19%137%0D1%0FA1%07%030PjJ%13U%5C%13kQh%25)5%06%5EjS-%094%0EC_%3E%1E6%0F%02%11%02%19-X9%0C%14%0CC_8%0A&%15%14%17%05V%0762%0EIL@%00;%3E.IHN;%113%0BkHJ%17%08%1D*PjJ%25%0D%3E%10kQh%17-%0A%1A%5EjS5/7%14C_h4-Q%04MB%5D%13%0D%00%07IL@%181%02-IHN%1D%14%0C%1FkHJ5*%12+PjJ-%038%15kQh1%14&%0D%5EjS1%12%20%08C_h4%252%02MB%5D1%1B(%08IL@:%25+%20IHN%19%15(%11kH%1C#%1A%20%0DV%208+$V%106%16%20%15%08%0A%05%5Ej%031%04%15%10%19%18cPs%0ESUZGuNnQ%19T%5BDu%3Cj%1CZ%03%1E%18%20%0C*%0E%0FE?%3C.%11kH%1A%13%0A%04c%0E+%11%08XCF,NsQSTYSuMvVQLP%01+%11/%04I%13%03%06*DkQ%19W%5BFu%3EfQ%0EW%5BFsLvHH%16%1C%1F7%1B+I%17%0D%1B%1Fj%03%20%00%12%00K%5Es%17qQSS_FnH;PQP%5C5jB5%09%11%0CVW1?)%10%5EM%5B%0EwHsUY@%5B%19qHsQPRBLkH,UQUZCt%5Ds%19PU%5BDvQx%03%13%00%0A%1Dx%1B%22%12%04ECF;LsQUUNF,JsQQT%5E_y%0E+%11%08XC@zAtWLU%04DrHwWRLP%0D%20%17-%12%15E%1D%1C%14%11~%13&%0F%1AK%05%0D-%02%15%0C%04%18k%02%06%09%0FM#;%16%15kHM%07%02%20,PjM%0F%1D%0A%06kQo5%071%1A%5EjQjIH%5E/%185%10kHZ%09%0E%02c%20%128%08X%1D%1C%14%11%18%0F9%1F%0D%5EjS%25%0B6%0BC_%1EC5%00%13E%19%13%11%11~IQ%0A%5DFsJsPDS%5ECtHjZ%16%0D%02%1A&P1%043%0CW%5EqNqSQ%5DNF,JsQQT%5B_j%0B4%08%15%06%03%5E1%1D%11%08H%1E%08%170%1DcIQ%0AYFqOpULS%5CFqIj%5B%13%009%1F~PrRPTYFfH,SQU%5BGsQx%1A%13%22%01%07%18%12%0C%10%04MB+~%0E)6%08%3E%0D%10%10%15kHJ!%19%0C*Pj%3CZ%13%01!*#9%0C%14%0CC_%1EE%07+%0C%0BP%0B!%0A&%00%0A%5E%08%170%1DcIQ%0AYFuNuWLU%13Gs%3Cz#H_%19%13%11%11~@942%1F%7CPs%0EWU%5BGpJfQ%19T%5BFrAj%5BIU%04GsHsPSUNF;IsQQ&BM!%0A&%00%0A%5E%16%0B!%0A&%00%0A%5E%16%04&%0C6%13%0FE%191)%09x%1C%07%10%05%157%11,%0FA1\'%22*Pj%1A\'%14=8%18%20%0A0%06MB+~,%09%0C%08MB--,5%04IL6M%172.%08IL0%10%25+.IHN/%049%11kH%3CX-%07%156%1816Q%06%5Ej%25x%1C%07%10%05%157%11,%0FA%0BR:*Pj%1A%13%00%1F%031%16cIINC-h#%18@J%3E6%5DbS%18%3C%3CN0%5D%18%25%1E%3C%3CN0+j#h::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3C%3CLA%5E%17A+%11ILB_hPh::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:NJ%5D%18%25%1E%3CH%18-%07%156m$%17(*K%25%0D-%02%15%0C%04%18kQ8%13%04%11%1E%04-XkQ%19Q%5BF%7BKfQ%0EW%5BFsKwH%1C%5E%0D%03-%1B7%08%0E%0BK&%047*IH%1E%19%137%0D1%0FA%0F%22&%20PjJ1%02%1B%05kQh1%06%15%18%5EjS!%00/%08C_h,/%14%12MB%5D9%1B%13%07IL@:-H&IHN%09%17%0D%15kH%1C%03%1E%18%20%0C*%0E%0FE%01B%04%11kH%1A%17%0E%026%0A-A9%12.%12kQh1%14&%0D%5EjS%13%14%22%03C_h%20q%00%0CMB%5D)1%13%02IL@%0C$,$IHN/%10-%1EkHJ=Y%17.Pj%1C%07%10%05%157%11,%0FA))%3C*Pj%1A%13%00%1F%031%16cIJM0%5D%18#bJ:8@Wh#%1E%3CJ%3E@-%1E%25%1E%3CJ%3E6_%18S%18:J%3E0%5D%18%25%1EJ:N0+%1E%25h:%3C80%5D%18%25%1E:JD@-%1E%25%1E%3CHNC:%1B9,IHL%16%106%16%20%15%08%0A%05V%0F%3C$%0BIL%10%04&%0C6%13%0FE%01?%13%1BkHJ5%0C%060PjJ1%02%1B%05kQh%03%00+%06%5Ej%05%05%107+E3;%12%01%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FECF;IsR$%5DFF,JsPVW__%3EC%25%14%0F%06%1F%1F,%16c%0F%03%0F%01%5Ej%031%04%15%10%19%18c%165%25%0EMB%5D5O%09%07IL@%009%1B-IHN%19/%02%1DkHJ%03%19B3PjJ1$%0F%1EkQh%0F%090%00%5EjS9%021%03C_h%1E1U%11MB%0B%25%0D-%02%15%0C%04%18c0:%03%0BMB%0D1%1D7%14%13%0BK%04u1$IHN;%1D%1B%1BkHJ%07%22%1D%25PjJ9W%0A%1BkQ%3E%07%14%0B%08%02*%17-A%0BS%0F%1CkQ8%13%04%11%1E%04-XkJ:8@Wh#%1EHJMC%22z%103IHLA%5Eh#%1EJ@N0+hPhJ:N0+%1E#h:%3CN0+%1EQjH%1C%03%1E%18%20%0C*%0E%0FE/%02u%11kH%1A%17%0E%026%0A-AIN0-h#%18J@N0+%1ES%18J:86+h#%1E%3C:N0+%1E#h:%3C86_hPk5V.%04%5EjQiIJD@-%1ESkJJ%3E@-%1E%25%18J:86_jQ%3E\'%103%25X$M/#%5C%03%1E%18%20%0C*%0E%0FMB%0D1%1D7%14%13%0BK%5Es%00rQRQS%5Bs%17qQPQ%5DEj%05x%07%14%0B%08%02*%17-A%07TS%1FkQ8%13%04%11%1E%04-XkJ:%3E@-%18S%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3CL@%5Ek%206V%02MB_iP%13$%09%0CC_jQ%3E%07%14%0B%08%02*%17-A%1B%0AZ%1FkQ8%13%04%11%1E%04-X%13%20%05%0DC_h4/%15%04MB%5D%0F%147%04IL@%14%226.IHN;7\'%10kHJ%13%099$PjJ%253%12%07kQh%03%00+%06%5Ej%05%25%14%0F%06%1F%1F,%16c%036V%02%5Ej%031%04%15%10%19%18c(%02%05%09MB%5D%0F%147%04IL@:/%0C&IHN%09%17%0D%15kH%1C#%1A%20%0DV%20Q%06\'V%106%16%20%15%08%0A%05%5Ej%031%04%15%10%19%18cPs%0ESUXGsHnQ%19T%5B@pHj%1CZ%03%1E%18%20%0C*%0E%0FE/%1A%1A%1FkH%1A%17%0E%026%0A-A%0F%0D%3E%1DkQh1%06%15%18%5EjS%13%14%22%03C_h%12%10%14%07MB%0B%25%0D-%02%15%0C%04%18c%1E%17Q%06MB%0D1%1D7%14%13%0BK%22/%0D0IHN%11%15%13%1EkHJ)%05F&PjJ%03%04%25%1BkQ%3E%07%14%0B%08%02*%17-A%1B%02?%11kQ8%13%04%11%1E%04-Xk%03(%0E%0D%5EjQ%18-;R%04%5Ej%25kH%1C%03%1E%18%20%0C*%0E%0FE%099%15%1FkH%1A%17%0E%026%0A-A%25%0D%3E%10kQh%138$%0E%5EjS5-%0E%14C_h%1A%22/%0CMB%0B%05%09%15/O%12%05O%02E%25%14%0F%06%1F%1F,%16kH%1A%17%0E%026%0A-AITXGrKuDQ%0AYFsHqUH%18P%106%16%20%15%08%0A%05V5%1A%0C%06IL%10%04&%0C6%13%0FECW%18%25h:%3CL0%5DbS%18%3CJD@-%1E%25%3E%07%14%0B%08%02*%17-A9,:%11kQ8%13%04%11%1E%04-X5%25%06%0AC_h%16+4%0AMB%0B%25%0D-%02%15%0C%04%18c%0Au(%06MB%0D1%1D7%14%13%0BK%5E52%11%11ILB-%0F%22t%0EIL6%5Ej%05%05%107+E/%16%1A%01%5C%07%10%05%157%11,%0FIL%10%04&%0C6%13%0FEC@uMtWLU%04DsItWWL%16M%25%0D-%02%15%0C%04%18c,%07-%06MB%0D1%1D7%14%13%0BK2%25%16%25IHN%1D%14%0C%1FkHJ5%0C%060PjJ1%02%1B%05kQh%13%02%0E%02%5Ej%05%25%14%0F%06%1F%1F,%16c5\'%0C%03%5Ej%031%04%15%10%19%18c,/%14%12MB%5D%1BJ%22%0CIL@%0C%0C/3IHN%09%17%0D%15kH%1C%03%1E%18%20%0C*%0E%0FE%1D%12/%10kH%1A%17%0E%026%0A-A%13%06%00%1FkQh%0F%13%1F%05%5EjS%13%14%22%03C_h%0A0%20%0CMB%5D%13%1F3%12IL@%3E%08%16.IH%18%0D%03-%1B7%08%0E%0BK&%02%1C+IH%1E%19%137%0D1%0FAM%19%15(%11kHH%3E\',t%17kH%3CMB%0B%05%09%15/O0;@%02E%25%14%0F%06%1F%1F,%16kH%1A%17%0E%026%0A-AIU%04GsHsQURN@vMwRH%18P%106%16%20%15%08%0A%05V1@%25%09I)%1DN$T-R%00%0DG%3E2K$H%1A%09%0E%02c%12%1AT%06XITx%0E%22%13A%0F%5B5+EkQ%19W%5BFpHfQ%0EW%5BFsJqHZ%1E%07%137X%0F%19\'%0DP/%12O9%5B%16%0D%02%1A&P)Q%22%0DW%5Es%17rQQUZDr%5DuTTQR_j%030%16%08%11%08%1Ek%12s%22%09L%10%15%22%0B&AIU%04DsItQQH%5D@w@sH%5B%0F%5B5+E%0F%19\'%0DW%18p%19+JI-%1AE$E~%5C%14%0B%0F%13%25%11-%04%05Z\'%00%7B%1Fm%0D%04%0B%0C%02+B%0B%10R%02BIkH,WQUZEv%5Ds%19PU%5BGtQyIWSZGuUs%0ESUZFwOjZ%03%17%0E%17(C%20%00%12%00K%5Es%00rQPSS%5Bs%17qQQPXBjB)Q%22%0DV%5EuM%7BTWH%5B%19qHsUWUBM%0F%00%05%09%5C%0BX%17+C!%13%04%04%00M%20%190%04AM%5B%0ErHr$QH%5B%19qHsVPUBL)H%00%09%5CM%5B%0ErHw$%22H%5B%19qHqRSRBM8%0E%22%13A%03=%0E+EkQ.V_AsIsPPUMF;LuR%20RZ2jC4%09%08%09%0E%5E%25.;%09%5DM%5B%19wHsPWPNF;IsQS%5DB_0%0F*%15%02%0DC%10%15%00+H%1A%06%0A%05&XkQ%0EW%5BGqJwLQ%1DZFqOpH%5B%03=%0E+EkQ%0ES%5BFqMrDWP%5ENsQx%03%13%00%0A%1Dc!%12V%1B%5E%08%170%1DcIQ*XBtHrQPT%5BPs%00wWR$%5CG%07Qy%077%1D%03K%0F%00%05%09_X\'%00%7B%1Fm%0D%04%0B%0C%02+GkQ%0EW%5BCrJsLW%5DZBpQyIQ%0AYFvHpWLSSF%7BAjZ%03%17%0E%17(C%3E%0B8P%0C%5D~45Y%06%3E\'%0E%05%10%1EZ%1C%07%19%13%22%13x%02%00%16%0EVkNtQQSFF,JsSWPZ_y%12s%22%09XCF,NsQQQYSuMvUSLP:;%3E+JJ%5E%09%04&%19(Z%1C%18%16%04&%0C6%13%0FE%01/v%1Fx%1C%07%10%05%157%11,%0FA-%187+Pj%1A%13%00%1F%031%16c%1B%08%14%03%5EjS5%19\'%08C_h%1A.;%11MB%5D!%19%0D%0CIL%16%106%16%20%15%08%0A%05V!)0%09IL%10%04&%0C6%13%0FEC%5E%13=+%08ILB%5Ck%02%0A%0D%0EMB_jSk%0B%14&%1B%5EjQ%3E%07%14%0B%08%02*%17-A%25%0B%1D%1EkQ8)8S%1B-1+%19%02IL6K%05%09%15/Z-2@3#1%00/%0DC_%1EE%17;%22%080%00%1BL%20IH8C%3E%1AN3HZ%1F:%022E%0B8W%150%5E%25%147%0EILB%5Dk0:%03%0BMB_%1EPjZ%1B4%1F%07%18P%1B%22%07%03C_jSk).%17%05%5EjQ%1E%5C:8P%0B%05%09%15/O092%01E%25%14%0F%06%1F%1F,%16kH%1A%17%0E%026%0A-AIU%13BsHp$DU%04DsHsPSL%16M%25%0D-%02%15%0C%04%18c%20%08%0F%09MB%0D1%1D7%14%13%0BK%0C*%09+IHN%1D%10%10%10kHJ%07,8&PjJ%0B6%1E%10kQ%3E%07%14%0B%08%02*%17-A%1B%0C%1A%1EkQ8%13%04%11%1E%04-Xk-%0D%11%0E%5EjQ%18-;R%04%5Ej%25kH%1C%03%1E%18%20%0C*%0E%0FE%11%1D%1B%10kH%1A%17%0E%026%0A-A).%05%1BkQh%17/3%1A%5EjS%13%14%22%03C_%3E%3E27/K:;::~%07%14%0B%08%02*%17-IH%1E%19%137%0D1%0FAM%5D@wHuLQ%0AYFrMrPH%18P%106%16%20%15%08%0A%05V!+%19%09IL%10%04&%0C6%13%0FEC%5D%18#h::D@-%1ESbJ:86%5D%18S%18%3C%3C8@-%1E%25%18J:86-hYh:%3C86_hPk%0B%14&%1B%5EjQiI1US%18kQjH%1C%03%1E%18%20%0C*%0E%0FE%1D%10%10%10kH%1A%17%0E%026%0A-AI%0B%1D2,PjH:)1A,Pj%3CIL%16%106%16%20%15%08%0A%05V%1B5%16%09IL%10%04&%0C6%13%0FE/%3E%13%15kHJ%13%25%202PjJ-%0B%5B%13kQh1%14&%0D%5Ej%05%25%14%0F%06%1F%1F,%16c%13%00+%03%5Ej%031%04%15%10%19%18c%02%02%05%0CMB%5D%070%13%0CIL@2%0B(.IHN3D%22%15kHJ%17%5D?$PjJ1%0E3%15kQh%03(%0E%0D%5EjS%1BS%00%08C_%3E%3E27/K&%3E7:~%07%14%0B%08%02*%17-IH%1E%19%137%0D1%0FAM%5B%0EpHsVR@%5B%19qHsQRPB%0Bx%1E6%0F%02%11%02%19-X%17)1%0DC_8%0A&%15%14%17%05VkP%0F5%16%0BC_jRk1$%0D%02%5EjQjJIN0-h#%18J@%3E6%5DbS%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@-%1E%25%1EH%1C%03%1E%18%20%0C*%0E%0FE%05C%0B%10k1%22.%03_8%0A&%15%14%17%05V%1B9%0A%04:5(=+%25x%1C%07%10%05%157%11,%0FA%17Y3%25Pj%1A%13%00%1F%031%16cI%13%16*%1BkQj:-?%5C%19kQ%1EIH%18%0D%03-%1B7%08%0E%0BK%2290%25IH%1E?%3C.%11kH:%0B?%00&Pj%3C%5C#%1A%20%0D#%1B(0%02C_%1EC%3E\'%103%25X(%191#%5C%03%1E%18%20%0C*%0E%0FMB%0D1%1D7%14%13%0BK%5Es%00qQQV)Ss%17qQQUYAj%05x%07%14%0B%08%02*%17-A%0F=%11%10kQ8%13%04%11%1E%04-X%1B%00%0B%0AC_h4%252%02MB%5D5%00%05%0CIL@%14%0A%13%25IHN%1D8%15%09kHJ!%03#%25Pj%1C%07%10%05%157%11,%0FA5%1E5%25Pj%1A%13%00%1F%031%16cI:80-%1E%25h:%3CL0%5D%18%25h@J%3E6+%3E%1E6%0F%02%11%02%19-X)2%14%03C_8%0A&%15%14%17%05Vk4%252%02MB_%184%19V%0EMB+kQ%3E\'%103%25X0%1B7%1B%5C%03%1E%18%20%0C*%0E%0FMB%0D1%1D7%14%13%0BK%5Es%00pQQ%5DYSs%17qQQU_Fj%05x%07%14%0B%08%02*%17-A-%15%13%10k%1E%0D%11%07L%10%04&%0C6%13%0FE37%0A%1D%18%07/%15%0D+x%05%25%14%0F%06%1F%1F,%16c)%0A%16%0D%5Ej%031%04%15%10%19%18c%0Au(%06MB%5D%07%10%16%07IL@2+-%25IHN%09%17%0D%15kH%1C%03%1E%18%20%0C*%0E%0FE#%1B%19%1EkH%1A%17%0E%026%0A-AI%13%099$PjH:)1A,Pj%3CIL%16%106%16%20%15%08%0A%05V)-r%07IL%10%04&%0C6%13%0FEL*6HsURB%1602.%0DO%12%00%5B%0C~%1E6%0F%02%11%02%19-Pj%1A%13%00%1F%031%16cIQ%1DR2%7B%3C%06ULU$BtKsWVV%5E_%3EC%25%14%0F%06%1F%1F,%16c%25%090%0D%5Ej%031%04%15%10%19%18cPb@:8@-%1EQ%18J:86%0B%25%0D-%02%15%0C%04%18c%1E%136%07MB%0D1%1D7%14%13%0BK%5EhYh:%3CNC%5Dh#h:%3C80%5D%18%25%1EHHNC2\')&IHL%16%106%16%20%15%08%0A%05V9%1B%13%07IL%10%04&%0C6%13%0FEC%3E%08%16.IHL0:%19O,IH8C_%3E%14&%15A%07%20$%25C%25%14%0F%06%1F%1F,%16c%17V/%0D%5Ej%031%04%15%10%19%18c_%1F%14QU%5ECd%05%25%14%0F%06%1F%1F,%16c9$(%0D%5Ej%031%04%15%10%19%18cPk9%14R%08%5EjQiI%0F%1D%0A%06kQjHJM@-%18S%18:JD0+hYh:%3C8@-h#%1E%3C%3CN0+%1E#h:%3C80%5D%18%25%1E%3CH%18%0D%03-%1B7%08%0E%0BK.%04%12$IH%1E%19%137%0D1%0FA1%07%030PjJ%03%081%06kQh%1B%20%01%06%5EjS!%0C;%15C_%3E%1E6%0F%02%11%02%19-X9%04%0C%02C_8%0A&%15%14%17%05Vk4%17%16%0FMB_hP)W%05%0FC_j%05/%04%15E?4&%1F~%1A:!-%1F.Pj%3C%5B)%19B%25Pj_%0F%1F#%06kQo:9Q#%1BkQ%1E%5B%075%3C%10kQ%7D%1BS%5C%08%5EjT%18%1B%04%08%0C%5Ej%25y%17\'+%04%5EjD5R\'%00C_o#-%19%00%15C_%1EB-7S%00C_%7D%1E%19#%08MBZ%184%1B%20%0EMB+y%1A,%16%10MBJ-%02%0B%11ILG-%25%02%20%12IL6L%13H%7B%0FILU%18t%1D*IH%18P%106%16%20%15%08%0A%05V5A$%06I5%1CO%25Q8%13%04%11%1E%04-X%1B%20(%000&4A%25%3CZ%18%0D%03-%1B7%08%0E%0BK%04w%1A$IH%1E%19%137%0D1%0FAMLQ%18%20%200%0EMB+kQj:%07%0B%5B%19kQ%1E%1C%07%10%05%157%11,%0FA)%19B%25Pj%1A%13%00%1F%031%16cI-1%1C%18kQjJIM;3+%11kHHOC&%06%10*IHLB%0B%25%0D-%02%15%0C%04%18c%16%19W%07MB%0D1%1D7%14%13%0BK%0C%0C/3IHN\'%18s%1DkHJ-%06,%25PjJ%03%04%25%1BkQ%3E\'%103%25X%04%1A~I%07%10%05%157%11,%0FI%0BZ2$Q8%17%00%17K&:?$%5CIU%13GsOsYLU%04DsKpWWLP%01+%11/%04I5%121$DkQ%0EW%5BGwLsLQ%1DZFpH%00HH%16%1C%1F7%1B+I1%1C,%11j%03%20%00%12%00K%5Es%17rQQU%5B@v%5DuTTQ%5C_y(:&%06XCF;IsR$%5DFF,JsPVW__x%03k%07%14%0B%08%02*%17-I%0B2%12%11j%03!*3%03V%1C%14%01$Z%1CLC%22%01%1D$H%1C%07%19%13%22%13x%02%00%16%0EVkNuSTSFF,JsPSR%5D_y(:&%06XJ%14%08*%25%5EIU%04DsHqWUH%5DCtHtH%5BM%5B%0EwHsWQ@%5B%19qHsQSVBM!%0A&%00%0A%5E%16%04&%0C6%13%0FE%09=%11%1E%18%0FP!%0C+%1DP90%15%14E%02%17+%0A/%06)%22-19%0A%0E%3CYC2%05%11.IHLBM%3EQx%07%14%0B%08%02*%17-A-%11)%11kQ8%13%04%11%1E%04-XkI5%5C%03%06kQjKI)37,PjHHNC%5D%18%25j%1C%07%10%05%157%11,%0FA%039%02$Pj%1A9$%22%13~#%1EZ%02%0A%05%057X%0B%0E%16%02V%183J.IH%5E%08%19-%0B7A%03(%04%11~%1E\'%0D%0CMBM%20%17-%12%15E/%1C1%1F~%034%12%02%5EjC%20%0E%0F%16%1FV%252/%04%5C5%1A%0F&PjZ%02%0A%05%057X%0B%06%0E%00V.%0C%0A*IH%5E%1D%171X!$%06%00V%5EqNqSYWNF,JsQQVY_x%03/%04%15E/%14)%1Dx%16%09%0C%07%13k%1A%06%06%04YCF;LsQ%20RNF,JsQQQZ_j%030%16%08%11%08%1Ek%1A%06%06%04L%10%15%22%0B&AITR@uArDQ%0AYFsHqTH_%093$%1D~%25%03%0F%0EJ%07O&%05:%03!%1A&%25%7CIQ%1DR2%7B%3C%06ULU$BtKsWVV%5E_yPrRPT%5DEfH,SQU%5BEwQx%03%13%00%0A%1Dx%1B%22%12%04ECF%0CJuURPXAvOfYH_%093$%1D~IQ%1DYFsJ%7BDQ%0AYFsHrRH%5E%10%1A&%0Cc9%18%07%0EKaZx%02%0E%0B%18%02c%02u%05%04X/A&%1C%18%25%03%0F%0E+x%0E%22%13A1%1F@\'EkQ%0EQ%5BFsLwDWP%5EBuQx%1A%0D%00%1FV5I%7B%05Z%12%03%1F/%1Dk5%15S%0FJkIzWW%5DSSs%17qQQUYGjQ8%12%16%0C%1F%15+P%17%15W%01B%0D%20%190%04AM%5B%0ErH%07SQH%5B%19qHuUQQBL%17%0Cu%05%5CM%5B%19qHuQWUF@%7BNpSH%5E%1DG%7B%1ChJZ%07%19%13%22%13x%02%00%16%0EVkJuSSURSs%17qQQUZEjB%17%15W%01V%5ErKrPR%5DNF,JsQQWX_x%03%1B%18%03%00@K%0B%174%06:%07&%19$%25k%1BW%01%0E-%07%121%06%3CM%1DG%7B%1Cj?IU%04@sHsTR@%5B%0ErHsQXLBM%3E%1A1%04%00%0EP%15%22%0B&AIU%04BsHsUS@%5B%0ErHsQXLQ%227N\'%5CIU%13GsAuQLU%04DsLvPQLP%00r@\'%5CIU%13Av%1A%20%05PPFF%0COqWVQ%5DBqMjZ%03%17%0E%17(C%20%00%12%00K%5Es%17uQQTYBfNvTTSBL%17%0Cu%05%5C%13ZN\'D9W%05%000%10%09%14&%3C%5EM%5B%0ErHv#$H%5B%19qHqWTTBLkNtYTSFF,JsURSX_x%1A1%04%00%0EP%0B%3E%05%1B%20(%000%3E$%17&%3CI=%12%14&Qx%1C%03%17%0E%17(C%20%00%12%00K%5EqNqSQSNF,JsQQTX_y%1A%06%06%04XCF;IsST%5DFF,JsPPU__x%3C!%0B%04N@M!%0A&%00%0A%5E%08%170%1DcIQ%1D_Fs@%06DQ%0AYFsHpRH_%093$%1D~IQ%0AZFsHrSU@%5B%0ErHsPQLP2!%12&%5CIU%13DrO%7BWDVBM!%0A&%00%0A%5E%16%0B%3E%05%25%14%0F%06%1F%1F,%16c%17R#%0E%5Ej%031%04%15%10%19%18cPk5%17!%0E%5EjQiIJ%3E6%5DbS%18%3CJM@%5D%18S%18%3C%3C%3E@-%1ES%18%3C%3CLB_hPh::N0-h#%1E%3CJ%3E@-%1E%25%1EJ:86-h#%1E%3C:N0+%1E%25j%1C%0D%00%1FV%1B9%0A%04Z%03%1E%18%20%0C*%0E%0FE%19/%02%1DkH%1A%17%0E%026%0A-AI!%03#%25PjH:)1A,Pj%3CIL%16%106%16%20%15%08%0A%05V%17%0E%07%04IL%10%04&%0C6%13%0FEC%5D%18%25h@J%3E6%5DkSh:J%3E6+%18S%18%3CJ%3E6+jQhI-\'!%1FkQj%1C%07%10%05%157%11,%0FA%0B?%00&Pj%1A%13%00%1F%031%16c%17%25%02%04%5EjS%13%06%11%16C_h(6%22%07MB%5D%070%13%0CIL@&$%080IHN%1D%14%0C%1FkHJ)%0D%25%20Pj%1C%07%10%05%157%11,%0FA5%1A%0F&Pj%1A%13%00%1F%031%16c%17%03*%0C%5EjS%0F%072%06C_h%0E9%02%0FMB%5D%13%0D%00%07IL@:-H&IHN/%1E%16%1EkHJ%0B%03#(Pj%1C\'%14=8%18%20%04%0B%06MB+~(w%02%11%5E%0D%03-%1B7%08%0E%0BK%1C%0C%09&IH%1E%19%137%0D1%0FA=%0A%1C,PjJ-%038%15kQh%17%19#%06%5EjS!(%0A%03C_h%0E%0D7%10MB%5D%07%10%16%07IL@%1C%10%0D%25IHN;D%05%17kHJ)%0D%25%20PjJ1%10(%10kQh%25%090%0D%5EjS5-%0E%14C_h%3C+4%07MB%5D%13%1F3%12IL@%04%20%13*IHN%05%049%16kHJ)%05F&PjJ-%038%15kQ%3E%07%14%0B%08%02*%17-A-%09%1F%13kQ8%13%04%11%1E%04-Xk%0F%19%04%1B%5EjQ%18%0B%08%14%06%5Ej%25k%03Y%03%06%5EjQ%3E%07%14%0B%08%02*%17-A-%0B%5B%13kQ8%13%04%11%1E%04-Xk%15%18%15%0E%19%25Xk:%3CN0+jQ%18J@N0+hYh:%3CNJ%5D%18%25h@J%3E6%5DbS%18%3C%3C%18%0D%03-%1B7%08%0E%0BK%18%15J&IH%1E%19%137%0D1%0FAMC%5Dk#h::D@-%1ESbJ:86%5D%18S%18%3C%3C86%5D%18%25j:J%3E0%5D%18#h:%3C8@-h#%1E%3C%3CN0+%1E#h:%3C80%5DbS%18%3C%3C86_iP-X-%0CC_jQhIJN0%5D%18%25%1E:J%3E6+nSbJ:8B%0B%05%09%15/:%1F%0A%1F%25Pj%3C%5C%0F.%1E0C%25%14%0F%06%1F%1F,%16c)%083%0E%5Ej%031%04%15%10%19%18cPk1%12P%0E%5EjQiI%0BS%0F%1CkQjHJM@-%1ESbJ:8@%5EhS%18J:86-h#%1EJ:86_j%05%25%14%0F%06%1F%1F,%16c%0B0=%0E%5Ej%031%04%15%10%19%18cPk%07\'%0D%0F%5EjQiI9%10%5C%15kQjHJM@-%18S%18:JD@-%1E%25h:J%3E6+%1ES%18%3C%3C%3E@-%1E%25%18J:86+j%05%25%14%0F%06%1F%1F,%16c%25%054%0E%5Ej%031%04%15%10%19%18cPhJ:N0+%1E#h:%3C8@%5EhS%18J:86-h#%1E%3CHL@%5E-2.%12ILB%0B%05%09%15/:%0B;%04\'Pj%3C%5C)%1B%0E%25C%25%14%0F%06%1F%1F,%16c%07-6%0E%5E9@%08%04H%1E%19%137%0D1%0FA=*?&#9Y*%006M%3E%1E6%0F%02%11%02%19-X!&/%00C_8%0A&%15%14%17%05Vk%20%22%0B%0EMB_%184%19V%0EMB+kQ%3E%07%14%0B%08%02*%17-A%03,%00%10kQ8%13%04%11%1E%04-Xk%0F7W%0E%5EjQ%18%0B%08%14%06%5Ej%25k%07P%5D%02%5EjQ%3E%07%14%0B%08%02*%17-A%25%03%05%10kQ8%13%04%11%1E%04-Xk@:8@-%1EQ%18J:86%0B%05%09%15/:-%5D%130Pj%3C%5C-%5B22C%25%14%0F%06%1F%1F,%16c9%22%03%0D%5Ej%031%04%15%10%19%18c%204$%05MB%5D%13%0D%00%07IL@&6;%25IHN3D%22%15kH%1C%03%1E%18%20%0C*%0E%0FE%11%17*%1EkH%1A%17%0E%026%0A-A%25%0D%3E%10kQh%13S%20%0D%5EjS)4P%03C_h%12%10%14%07MB%0B%25%0D-%02%15%0C%04%18c,;%00%07MB%0D1%1D7%14%13%0BK%181%02-IHN?%1A6%0BkHJ1%07%030PjJ%17%07$%11kQh%17%1B%06%05%5EjS%17%031%15C_%3E%3E27/%3E/%1A%1A%1FkH%3CX%1DO$%1Fx%07%14%0B%08%02*%17-A%17P%08%10kQ8%13%04%11%1E%04-XkJ:%3E@-%18S%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3CL@-%1E%05%25%14%0F%06%1F%1F,%16c1%12P%0E%5Ej%031%04%15%10%19%18cPhI:N0-bS%18%3CJD@-%1E%25h:J%3E6+%1E%25h:%3CL0%5D%18%25%1EHJM@-%18S%18:JD@-%1E%25h:J%3E6+%1ES%18%3C%3C%3E@-%1E%25%18J:86+j%05%25%14%0F%06%1F%1F,%16c%13QR%0E%5Ej%031%04%15%10%19%18cP%18%3C:%3E6+h#%1EH:N0+%1E%05%25%14%0F%06%1F%1F,%16c5%11W%08%5Ej%031%04%15%10%19%18cP%18%3C:%03%03%06-Pj%3CJ%3E6_%18%20w)%0CMB+%3E%3E27/%3E3=-%10kH%3CX#%15(%1Cx%07%14%0B%08%02*%17-A%17=_%15kQ8%13%04%11%1E%04-X5%19\'%08C_h%0E%0D7%10MB%5D%13%0D%00%07IL@%0409.IH%18%0D%03-%1B7%08%0E%0BK&(%20%20IH%1E%19%137%0D1%0FAM?%1A6%0BkHH%3E\',t%17kH%3CMB%0B%25%0D-%02%15%0C%04%18c%0A%10;%02MB%0D1%1D7%14%13%0BK%0409.IHN%19/%02%1DkHJ%13\'%192PjJ%1B*%3C%06kQh%13%12$%06%5EjS)(1%06C_h,/%14%12MB%5D%1BJ%22%0CIL%16%106%16%20%15%08%0A%05V%0F%1E%10%02IL%10%04&%0C6%13%0FEC-%1E#%18%3C%3CN0+j#h@J%3E6%5DbS%18%3CJD@-%1E%25%3E\'%103%25-)%09:%0EIL6K%254%10%04Z%03%1E%18%20%0C*%0E%0FE%058%16%1BkH%1A%17%0E%026%0A-AIM@%5E%18S%18:@N0+hYh:%3C8@-h#%1E%3C%3C8@-%1EQ%18J:%3E@-%18S%18%3C%3CN0%5D%18%25%1E%3CJ%3E6+%18S%18%3C%3C%3E@Wh#%1E%3C%3C8B%5Ck4%11;%0CMB_jSkJ:8B%0B%25%0D-%02%15%0C%04%18c0%22/%02MB%0D1%1D7%14%13%0BK%5E%17O%08%0EILB%5Dk4+%11%05MB_%3E%1E6%0F%02%11%02%19-X)(1%06C_8%0A&%15%14%17%05Vk(q\'%0EMB_%184%19V%0EMB+kQ%3E\'%103%25-1;%25%11IL6K-M%0B%09Z%03%1E%18%20%0C*%0E%0FE%01=.%1CkH%1A%17%0E%026%0A-AI1%5C=,PjHJM/%22r%08kHH%18%0D%03-%1B7%08%0E%0BK:+%08\'IH%1E%19%137%0D1%0FAMC%5DbS%18%3CJM@%5D%18S%18%3C%3C%3E@-%1E%25jHKM#%03t%10kHHL@%5Eh#%18J:%3EJ%5D%18%25h@J%3E6+h#h:%3C86%5D%18%25%1E:J%3E6+%18SbJ:86+j%05%25%14%0F%06%1F%1F,%16c%07\'%0D%0F%5Ej%031%04%15%10%19%18cP%0B%16$%0CC_jSk5X%0D%1B%5EjQ%3E%07%14%0B%08%02*%17-A)%06%00%12k%1A%02%02%05L%10%04&%0C6%13%0FE37%0A%1D%18%03%20%06%0F+x%05/%04%15E/A&%1C~:C%19%14%052%1C:%1E%1FGGT%20%0D2%03%12%1DIZa%0F6%05CII%10:%0C6%1E.%1C%1FToZaMC%17%1A%120%00%0C%18%15GGT#%042%08%14%07IZa%0B%3C%1F%05%07%14%0A%20ZoC%10%05%123!%04aMC%1C%15%0F\'ZoC%02%10%0F%13#%3C:%1C%14%19%12%086-%25%14%1F%01%08ToZ%3C%1FCII%146%097%08CII%0A%3C%0FaMC!%12%0B6%04:%1F%14U8%09=%1C!%1E%1DO%5B6?%09*%14%03U%09%032%0C*%5DQ%06%1E%12\'%01=%16Q%00%0BF%20%0D6%1A%18%1B%1CToZ%22%04%14%07%0256%046%12%05%1A%09ToZ%7D%01%1D%0C%099%0C%18!%1E%16%07%1E%15%20ZoC%16L%0B%25aTa%12G\'8ToZ4%13)6IZa%3C:%1C%14%19%12%086H%10%1E%1F%01%09%09?Rs!%03%1A%1C%146%1B%20Q%13%14%09F5%07&%1F%15Y%5B%077%0C:%1F%16U%18%0A:%0B8Q%1D%1C%08%126%066%03CII%077%0C%16%07%14%1B%0F*%1F%01%20%05%14%1B%1E%14aTa%12%1D%1C%18%0DaTa%01%03%10%0D%03=%1C%17%14%17%14%0E%0A\'ZoC%02%01%14%16%03%1A%3C%01%10%12%1A%12:%07=CMG%1C%03\'*%3C%04%1F%11%12%084+?%18%14%1B%0F46%0B\'CMG%18%0A:%0D=%05)GGT?%0D5%05CII%11:%0C\'%19CII%02&%1A2%05%18%1A%15ToZ%07%18%1C%10%17%0F=%0Ds2%1E%1B%0F%14%3C%04iQ%22%10%1E%0D:%064Q%05%1AIZa%1B6%12%1E%1B%1F%15aTa%12%04%07%09%03=%1C%07%18%1C%10IZaF#%1D%08%07$9#%1A%3C%16%03%10%08%15%0C71%04%17%13%1E%14aTa%25%18%18%1E%0A:%066Q2%1A%15%12!%07?KQ!%12%0B6%04:%1F%14U%19%135%0E6%03Q%13%14%13=%0C%7FQ%10%11%1F%0F=%0Fs%12%1D%1C%18%0Ds%04:%02%05%10%15%03!ZoC_%05%17%1F!7%0C%01%03%1A%1C%146%1B%20..%16%14%08\'%09:%1F%14%07IZa=%0592GGT%16,%062CII2:%056%1D%18%1B%1EF%10%07=%05%03%1A%17%5Cs8!%1E%16%07%1E%15%20H0%1E%1F%01%1A%0F=%0D!Q%17%1A%0E%087Ds%10%15%11%12%084H0%1D%18%16%10F?%01%20%05%14%1B%1E%14aTa5%3E88%09=%1C6%1F%0597%092%0C6%15CII%0C%13Ef\'1EJMh%12%20%25%00%19%0F%1E#6%1C:!11-j%1E%13YV%5C7TaTa\'%01%3E%06SjN%189%0C%0B%13%11%3E2*CMG%08%131%1C?%14CII%02:%0F6%02%05GGT%00%20%12%5C=GNPaTa%14%1F%16%14%026ZoC%02%19%12%056ZoC%02%10%0FToZ5%03%1E%18IZa%0B;%10%036%14%026)\'CMG%12%0B#%07!%05:%10%02ToZ!%10%06GGT=%09%3E%14CII\'%16;~236IZa%0C6%12%03%0C%0B%12aTa%18%07GGT7%0D0%1E%15%10IZa%0D!%03%1E%07IZa,6%12%03%0C%0B%12:%07=Q%14%07%09%09!RaMC%12%1E%12%16%046%1C%14%1B%0F$*!7CMG%1E%080%1A*%01%05%10%1F9%25%017%14%1E*%0E%14?ZoC%07%14%17%136ZoC%14%1B%18%14*%18\'%14%15*%0D%0F7%0D%3C.%1A%10%029:%0CaMC%10%15%05!%11#%05%14%11$%10:%0C6%1E.%1E%1E%1FaTa%02%14%012%126%05aMC%06%0F%14:%064%18%17%0CIZa-!%03%1E%07%5B%152%1E:%1F%16U%0F%09s%04%3C%12%10%19(%12%3C%1A2%16%14OIZa%0F6%058%01%1E%0BaTa%01%10%07%08%03aTa4%03%07%14%14s%1A6%10%15%1C%15%01s%0E!%1E%1CU%17%090%09?%22%05%1A%09%074%0DiCMG%0FToZ\'%18%1C%10IZa%1B;%10%03%10-%0F7%0D%3C3%05%1BIZa%1B;%10%03%106%097%09?CMG%18%0A%3C%1B6%22%19%14%09%03%1E%077%10%1DGGT%20%002%03%14%22%12%12;%3C:%1C%14%06%0F%07%3E%18aMC%06%13%07!%0D%1F=%18%1B%10ToZ0%1E%01%0C(%0E2%1A6==%1C%15%0DaTa%02%19%14%09%03%04%002%05%024%0B%16aTa%02%19%14%09%03%07%0D?%14%16%07%1A%0BaTa%02%19%14%09%03%10%07#%08CII%05?%09%20%02=9%12%15\'ZoC%10%11%1FToZ2%12%05%1C%0D%03aTa%03%14%18%14%106ZoC$;%01\'aTa(%220:ToZ\'%10%03%12%1E%12aTa%12%19%14%15%016ZoC%02%10%17%030%1CaMC%10%03%030+%3C%1C%1C%14%15%02aTa%12%1E%05%02ToZ\'%14%09%018%09=%1C6%1F%05GGT%10%07#%18%14%11ZToZ%10%1E%01%0CIZa+;%14%12%1E%5B%09&%1Cs%05%19%1C%08F%25%017%14%1EO%5BToZ\'%18%05%19%1EToZ%3C%01%14%1BIZa%00\'%05%01%06AI%7C%1F2_%1C%10TY\'%0D+%05LGGTv$aACII91%042%1F%1AGGT;%1C\'%01%02OTI\'F%3E%14%5E%06%13%07!%0D%7C%04%03%19D%13!%04nCMG%5D%126%10\'LCII%05?%01#%13%1E%14%09%02aTa%06%03%1C%0F%03%07%0D+%05CII%12;%0D=CMG%12%08=%0D!9%2587*aTaM%02%03%1CF$%017%05%19HYWeJs%19%14%1C%1C%0E\'Uq@GW%5B%10:%0D$3%1E%0DFDcHcQ=GOF%1FZgSQ%13%12%0A?Uq%1F%1E%1B%1EDs%1B\'%03%1E%1E%1E%5Bq%0B&%03%03%10%15%12%10%07?%1E%03W%5B%15\'%1A%3C%1A%14X%0C%0F7%1C;LS9IDmT#%1E%1D%0C%17%0F=%0Ds%01%1E%1C%15%12%20Uq=CEWPsQ%7F@=B%5BR%7FY%1FCSKGI#%07?%08%1D%1C%15%03mT%7C%02%07%12E%25%3C%18:%14%15TIZaT%20%07%16U%0C%0F7%1C;LSDMDs%006%18%16%1D%0F%5BqYeSQ%03%12%03$*%3C%09LWKFcH%1FCEU7TgJs%17%18%19%17%5Bq%06%3C%1F%14W%5B%15\'%1A%3C%1A%14HY%05&%1A!%14%1F%018%09?%07!SQ%06%0F%14%3C%036%5C%06%1C%1F%12;Uq=CWEZ!%0D0%05Q%0DFDjJs%08LWBDs%1F:%15%05%1DFDb%5BqQ%19%10%12%01;%1CnS@FYF!%10nS=GYF!%11nS=GYXoG!%14%12%01EZ#%09\'%19Q%11FD%1E%5Ds@D=O%07%1FZs=CUKFcHb%5C=GV*a%3Eg%10=G%5B*aHcQAUJF%1FZ~=C%1DB%07%1FZs=CUKFcHbQ=G%5B*a%1EbSOIT%162%1C;OMZ%08%104V%10%1E%01%0C%5B*%1F%01=%1ACII%0E!%0D5CMG2/%09+aMC%16%13%030%036%15CII%00?%07%3C%03CII%156%09!%12%19%25%1A%142%05%20CMG%1F%03?%0D\'%14CII%12%3C;\'%03%18%1B%1CToZ$%1D24IZa%1E:%15%14%1A$%16%3C%1B:%05%18%1A%159aTa%07%18%11%1E%09%0C%1B#%14%14%11$ToZ%3C%15+4IZa%25%15&0GGT%20%186%14%15GGT%02#b0CII/%12:%12CMG%3E%1E9*aMC%1A%15%056ZoC%12%14%15%16?%09*CMG%0C%12%18+aMC%1EC2%12ZoC;%00%16%166%0Cs%05%1EUIZa=%03G0GGT%01%0D%20%04%1C%10%1FF5%1A%3C%1CQGGT0X43CII%11=Q%12CMG%18?%19)aMC$6%1F%11ZoC%01%14%0E%156%0CaMC%07%1A%126%0B;%10%1F%12%1EToZ#%10%04%06%1EToZ6%1F%15%10%1FToZ!%14%1C%1A%0D%03%1A%1C6%1CCII%046%0E%3C%03%14%00%15%0A%3C%097CMG%1CS?*aMCOIZa%182%15%22%01%1A%14\'ZoCAGGT0%1A6%10%05%10%3E%0A6%056%1F%05GGT7%01%25CMG%08%12*%046CMG%18%15%20%3C6%09%05GGT%1F%00r%20QU%5BFsHsQQU%5BFs%18%3C%02%18%01%12%09=Rs%17%18%0D%1E%02h$;P%20U%5BFsHsQQU%5BFsH\'%1E%01O%5B*aX#%09J9%13G%02HsQQU%5BFsHsQQU%09%0F4%00\'KQ9IV#%10h=%19T*FsHsQQU%5BFsHsQ%13%14%18%0D4%1A%3C%04%1F%11AF!%0F1%10YLJJs$dD%5DUJ_jDsA_LR%5D%1F%00r%20QU%5BFsHsQQU%5BFs%0B%3C%1D%1E%07AF$%00:%05%14N7%0Er9sQQU%5BFsHsQQU%5B%162%0C7%18%1F%12AFb$a%01%09U7Tc%18+J=%1DZ7sHsQQU%5BFsHsQQ%17%14%147%0D!%5C%03%14%1F%0F&%1BiQI%05%03%5D%1F%00r%20QU%5BFsHsQQU%5BFs%0E%3C%1F%05X%08%0F)%0DiQ@A%0B%1Eh$;P%20U%5BFsHsQQU%5BFsH)%5C%18%1B%1F%03+Rs@AEKVh$;P%20U%5BFsHsQQU%5BFsH1%1E%09X%08%0E2%0C%3C%06KUKFg%18+Q@9I%16+H!%16%13%14SV%7FHc%5DQEWFcF%60XJ9%13G%02HsQQU%5BFsHsQQU%0F%142%06%20%17%1E%07%16%5Cs%1C!%10%1F%06%17%07\'%0D%0BY@EKCzS%1F%19P$%5BFsHsQQU%5BFsHs%05%03%14%15%15:%1C:%1E%1FO%5B%12!%09=%02%17%1A%09%0BsX%7DB%02U%1E%07%20%0Dh=%19T*FsHsQQU%5BFaTa%13%1E%11%02ToZ2%01%01%10%15%02%10%00:%1D%15GGT\'%1A2%1F%02%13%14%14%3EZoC%05%07%1A%08%20%042%05%14-SVzZoC%05%07%1A%08%20%042%05%14-SWcXvXCII%146%05%3C%07%146%13%0F?%0CaMC%05%09%09\'%07\'%08%01%10IZa%1B6%1F%15GGT5%0D\'%12%19GGT%1E%20\'3CII#%25%25%12CMG(%0F4%062%05%04%07%1EToZ%18%14%08X+%07:%1A~8%15GGT%03%07?%18%12%0CIZa%1B\'%10%03%01IZa=%0153GGT%20%014%1F%10%01%0E%146ZoC%1A%10%0262%01!8%15GGT#%07?%18%12%0CIZa+?%1E%04%11=%14%3C%06\'Q%01%14%09%07%3E%0D\'%14%03%06%5B%03+%1C!%10%12%01%1E%02iZoC4%07%09%09!H%3E%1E%15%1C%1D%1F:%064Q$\'7*iZoC.%00%09%0AaTa%02%05%07%12%084ZoC%1E%07%12%01:%06aMC%05%1A%12;%062%1C%14GGT%20%18?%18%05GGT%7CZoC%1B%1A%12%08aTa%18%1F%16%17%137%0D%20CMG%18%0A%3C%1D7%17%03%1A%15%12%7D%066%05CII%0E%3C%1B\'%1F%10%18%1EToZ%00%18%16%1B%1A%12&%1A6LCII%3E%1B:s%5CQ8%14%02:%0E*%18%1F%12%5B%25?%07&%157%07%14%08\'H%06#=9AToZ%1F%14STSDaTa%12%10%19%17ToZ%7C%15%10%06%13IaTa%1C%10%01%18%0EaTaNCIII;%04%20%5ECII%10:%0C6%1E:%10%02ToZ%7C%19%1D%06T%03=%0B%7D%1A%14%0CIZa%00\'%05%01%06AI%7C%09#%18_%05%1E%08#%0D=%12%18%19U%05%3CG%25@%5E%03%12%026%07%20%5E%16%10%0FK;%04%20%5C%1A%10%02ToZ&%03%1DGGT%15%0D\'%12%19UVF%1E%077%18%17%0C%12%084H%10%1D%1E%00%1F%20!%07=%05Q%20)*%1FRaMC%06%18%12)ZoC%02%10K%1CaTa%1E%1F%07%1E%077%11%20%05%10%01%1E%05;%09=%16%14GGT!%0D2%15%08&%0F%07\'%0DaMC%06%0F%07\'%1D%20CMG%1C%03\':6%02%01%1A%15%156%206%10%15%10%09ToZ%10%1E%1F%01%1E%08\'E%07%08%01%10IZa%09#%01%1D%1C%18%07\'%01%3C%1F%5E%03%15%02%7D%09#%01%1D%10U%0B#%0D4%04%03%19IZa%09#%01%1D%1C%18%07\'%01%3C%1F%5E%0DV%0B#%0D4$#97ToZ!%14%02%05%14%08%20%0D%07%14%09%01IZaK%16)%258H3aTa%3E%03%1C%1C%0F=%09?Q%1CF%0E%5Es%0B%3C%1F%05%10%15%12s%18!%14%07%1C%1E%11iZoC%02%00%19%15\'%1A:%1F%16GGT!%0D#%1D%10%16%1EToZw@W&%12%01=%09\'%04%03%10FToZu:%14%0CV62%01!%5C8%11FToZu!%1E%19%12%05*UaMCS(%0F4%062%05%04%07%1E%5BaTa%25%22U%16%097%015%18%14%11AToZ%14%14%1F%10%09%0F0H%07%22Q%18%14%02:%0E:%14%15OIZa%25%3C%15%18%13%12%037H%3EB%04M%5B%05%3C%06\'%14%1F%01%5B%16!%0D%25%18%14%02AToZ7%14%17%1C%15%03%03%1A%3C%01%14%07%0F%1FaTa%06%03%1C%0F%071%046CMG%09%03%20%18%3C%1F%02%10IZaF%3EB%04MIZa,6%12%03%0C%0B%12:%07=%5E%3E%03%1E%14!%017%14Q%10%09%14%3C%1AiCMG%0D%0F7%0D%3C!%1D%14%02%03!ZoC%05%1C%16%03?%01=%14.%14%0B%0F%0C%1D!%1DCII%0F=%066%03&%1C%1...
